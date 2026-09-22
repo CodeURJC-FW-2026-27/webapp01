@@ -14,9 +14,10 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 ## Functionality:
 ### Entities:
 - Main entity: Dishes
+- Main entity Attributes: Healing properties, Type, Chef, Food critic review, Price
 - Secondary entity: Ingriedents
-- Attributes: Healing properties, Type, Lactose intolerancy, Celiac, Chef, Food critic review, Price
-
+- Secondary entity Attributes: Lactose intolerancy, Celiac, Organic
+  
 ### Images:
 Each dish has an associated picture representing the meal.
 
