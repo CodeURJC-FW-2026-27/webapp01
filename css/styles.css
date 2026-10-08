@@ -11113,3 +11113,337 @@ p {
 .address strong {
   font-size: 1.2rem;
 }
+
+.d-flex .element-colum-dish-container{
+  background-color : white;
+  display : flex;
+} 
+.d-flex .element-colum-dish-container p{
+  color: var(--tonio-brown);
+} 
+
+.menu-preview {
+  padding: 4.5rem 0;
+  color: var(--tonio-ivory);
+  background: linear-gradient(115deg, rgba(35, 17, 13, 0.97), rgba(79, 34, 25, 0.94));
+  border-top: 1px solid rgba(215, 167, 94, 0.5);
+  border-bottom: 1px solid rgba(215, 167, 94, 0.5);
+}
+
+.menu-preview-heading {
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.menu-preview-heading .section-heading {
+  color: var(--tonio-ivory);
+  font-size: 2.4rem;
+}
+
+.menu-eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--tonio-gold-soft);
+  font-family: "Raleway", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.menu-preview-heading > p:last-child {
+  margin: 0;
+  color: rgba(255, 250, 242, 0.76);
+}
+
+.menu-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.preview-dish {
+  overflow: hidden;
+  color: var(--tonio-brown);
+  background: var(--tonio-ivory);
+  border: 1px solid rgba(215, 167, 94, 0.5);
+  border-radius: 0.35rem;
+}
+
+.preview-dish img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.preview-dish-copy {
+  padding: 1.2rem 1.25rem 0.6rem;
+}
+
+.menu-dish-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.menu-dish-heading h3 {
+  margin: 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.menu-dish-heading span {
+  flex: 0 0 auto;
+  color: var(--tonio-red);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.preview-dish-copy > p {
+  margin: 0.55rem 0 0.3rem;
+  color: #66554b;
+  font-size: 0.92rem;
+}
+
+.menu-preview-action {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.menu-page {
+  color: var(--tonio-brown);
+  background: linear-gradient(120deg, var(--tonio-gold-soft), var(--tonio-cream));
+  border-top: 1px solid rgba(215, 167, 94, 0.65);
+  border-bottom: 1px solid rgba(215, 167, 94, 0.65);
+}
+
+.menu-hero {
+  display: flex;
+  min-height: 24rem;
+  align-items: center;
+  color: var(--tonio-ivory);
+  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../assets/img/restaurantinside.png") center 54% / cover;
+  border-bottom: 3px solid var(--tonio-gold);
+}
+
+.menu-hero-content {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.menu-hero h2 {
+  max-width: 15ch;
+  margin: 0 0 0.5rem;
+  color: var(--tonio-ivory);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.menu-hero-content > p:not(.menu-eyebrow) {
+  max-width: 32rem;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 250, 242, 0.88);
+  font-size: 1.08rem;
+}
+
+.menu-hero .btn {
+  padding: 0.85rem 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu-jump {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.25rem, 5vw, 4rem);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(47, 21, 15, 0.18);
+}
+
+.menu-jump a {
+  color: var(--tonio-red);
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.menu-jump a:hover {
+  color: var(--tonio-brown);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.menu-content {
+  max-width: 78rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+}
+
+.menu-category {
+  padding: 2.6rem 0 1.2rem;
+  scroll-margin-top: 1rem;
+}
+
+.menu-category-heading {
+  display: grid;
+  grid-template-columns: 2.5rem auto 1fr;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 2px solid rgba(125, 31, 31, 0.55);
+}
+
+.menu-category-heading > span {
+  color: var(--tonio-red);
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.menu-category-heading h2 {
+  margin: 0;
+  color: var(--tonio-brown);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.menu-category-heading p {
+  margin: 0 0 0 auto;
+  color: #76645a;
+  font-size: 0.88rem;
+  font-style: italic;
+  text-align: right;
+}
+
+.menu-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.menu-dish {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--tonio-ivory);
+  border: 1px solid rgba(215, 167, 94, 0.55);
+  border-radius: 0.3rem;
+}
+
+.menu-dish img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.menu-dish-placeholder {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 1.5rem;
+  color: var(--tonio-brown);
+  background: linear-gradient(145deg, var(--tonio-gold-soft), var(--tonio-cream));
+  border-bottom: 1px solid rgba(125, 31, 31, 0.2);
+  font-family: "Lora", Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.menu-dish-details {
+  min-width: 0;
+  flex: 1;
+  padding: 0.95rem 1rem 1.1rem;
+}
+
+.menu-dish-heading {
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.menu-dish-heading h3 {
+  font-size: 1rem;
+}
+
+.menu-dish-details > p {
+  margin: 0.55rem 0 0;
+  color: #66554b;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.menu-note {
+  margin: 2.3rem 0 0;
+  padding-top: 1rem;
+  color: #66554b;
+  border-top: 1px solid rgba(47, 21, 15, 0.18);
+  font-size: 0.88rem;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 991.98px) {
+  .menu-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 767.98px) {
+  .menu-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-preview-grid {
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  .menu-hero {
+    min-height: 21rem;
+    background-position: 58% center;
+  }
+
+  .menu-jump {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .menu-jump a {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .menu-list {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-category-heading {
+    grid-template-columns: 1.5rem auto;
+  }
+
+  .menu-category-heading p {
+    grid-column: 2;
+    margin: 0;
+    text-align: left;
+  }
+
+  .menu-dish-heading {
+    gap: 0.5rem;
+  }
+
+  .menu-dish-heading h3 {
+    font-size: 0.98rem;
+  }
+}

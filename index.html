@@ -94,64 +94,214 @@
               turning dinner into an unforgettable experience.
             </p>
             <div class="intro-button mx-auto">
-              <a class="btn btn-primary btn-xl" href="#!">Reserve tonight</a>
+              <a class="btn btn-primary btn-xl" href="#menu">Explore the menu</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Grid must be here -->
+    <!--Un pequeño header con la imagen por dentro del restaurante (sujeto a posibles cambios)-->
+    <main class="menu-page" id="menu">
+      <section class="menu-hero" aria-labelledby="home-menu-title">
+        <div class="container menu-hero-content">
+          <p class="menu-eyebrow">Fresh from Tonio's kitchen</p>
+          <h2 id="home-menu-title">The menu</h2>
+          <p>Italian favourites, generous ingredients and a little bit of culinary magic.</p>
+        </div>
+      </section>
 
-    <div class="container">
-
-        <!-- FILA 1 -->
-      <div class="row">
-        <div class="col-sm">
-            <div class="d-flex flex-column">
-                <div>
-                    <img src="assets/img/magicians_red_bravas.png" class="img-fluid" alt="">
-                </div>
-                <div class="elementor-widget-container">
-                    <p>Hermano esto esta to bueno</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="d-flex flex-column">
-                <div>
-                    <img src="assets/img/magicians_red_bravas.png" class="img-fluid" alt="">
-                </div>
-                <div class="elementor-widget-container">
-                    <p>Hermano esto esta to bueno/p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="d-flex flex-column">
-                <div>
-                    <img src="assets/img/magicians_red_bravas.png" class="img-fluid" alt="">
-                </div>
-                <div class="elementor-widget-container">
-                    <p>Hermano esto esta to bueno</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="d-flex flex-column">
-                <div>
-                    <img src="assets/img/magicians_red_bravas.png" class="img-fluid" alt="">
-                </div>
-                <div class="elementor-widget-container">
-                    <p>Hermano esto esta to bueno</p>
-                </div>
-            </div>
-        </div>
-
+      <!-- Aqui un mini menu arriba porque queda chulo y bonito y se hace con el direccionamiento mediante los ids de las sections-->
+      <nav class="container menu-jump" aria-label="Menu categories">
+        <a href="#drinks">Drinks</a>
+        <a href="#starter">Starters</a>
+        <a href="#main-course">Main Courses</a>
+        <a href="#side-dish">Side Dishes</a>
+        <a href="#dessert">Desserts / Breakfast</a>
+      </nav>
+      <!-- Aqui empieza el propio contenido del menu es decir el grid con todas las subcategorias y demas-->
+      <div class="container menu-content">
+        <section class="menu-category" id="drinks" aria-labelledby="drinks-title">
+          <div class="menu-category-heading">
+            <span>01</span>
+            <h2 id="drinks-title">Drinks</h2>
+            <p>A toast to good company</p>
+          </div>
+          <div class="menu-list">
+            <article class="menu-dish">
+              <img src="assets/img/cerveza.png" alt="Glass of beer" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Cerveza</h3><span>€4.50</span></div>
+                <p>A crisp, refreshing house pour.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/agua_mineral.png" alt="Mineral water" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Agua Mineral del Kilimanjaro</h3><span>€2.50</span></div>
+                <p>Still or sparkling.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/te_verde.png" alt="Cup of green tea" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Té Verde</h3><span>€3.50</span></div>
+                <p>Delicate, fragrant tea served warm.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="menu-category" id="starter" aria-labelledby="starter-title">
+          <div class="menu-category-heading">
+            <span>02</span>
+            <h2 id="starter-title">Starters</h2>
+            <p>A little something for the table</p>
+          </div>
+          <div class="menu-list">
+            <article class="menu-dish">
+              <img src="assets/img/muda_muda_bites.png" alt="Golden bites with melted cheese" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Muda Muda Bites</h3><span>€9.00</span></div>
+                <p>Crunchy golden bites with a warm, savoury centre.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/overdrive_de_almejas_al_limon.png" alt="Clams in lemon sauce" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Overdrive de Almejas al Limón</h3><span>€18.50</span></div>
+                <p>Fresh clams, lemon, parsley and a light garlic sauce.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/magicians_red_bravas.png" alt="Patatas bravas with red sauce" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Magician's Red Bravas</h3><span>€8.50</span></div>
+                <p>Crispy potatoes, smoky tomato and Tonio's fiery house sauce.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="menu-category" id="main-course" aria-labelledby="main-course-title">
+          <div class="menu-category-heading">
+            <span>03</span>
+            <h2 id="main-course-title">Main Courses</h2>
+            <p>Tonio's signature dishes</p>
+          </div>
+          <div class="menu-list">
+            <article class="menu-dish">
+              <img src="assets/img/made_in_heaven.png" alt="Made in Heaven dish" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Made in Heaven</h3><span>€24.00</span></div>
+                <p>Tonio's signature dish.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/chuletas_de_Cordero_con_salsa_de_manzana.png" alt="Lamb chops with apple sauce" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Chuletas de Cordero con Salsa de Manzana</h3><span>€21.00</span></div>
+                <p>Tender lamb chops with apple sauce and seasonal greens.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/shashimi_imperial_del_mar.png" alt="Imperial seafood sashimi platter" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Sashimi Imperial del Mar</h3><span>€22.00</span></div>
+                <p>A colourful selection of the day's finest seafood.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/paghetti_alla_Puttanesca.png" alt="Spaghetti alla Puttanesca" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Spaghetti alla Puttanesca</h3><span>€15.00</span></div>
+                <p>A classic Italian pasta from Tonio's kitchen.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/meat_explosion.png" alt="Crispy savoury bites with cheese" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Meat Explosion</h3><span>€11.00</span></div>
+                <p>Seasoned beef, crisp coating and a touch of melted cheese.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="menu-category" id="side-dish" aria-labelledby="side-dish-title">
+          <div class="menu-category-heading">
+            <span>04</span>
+            <h2 id="side-dish-title">Side Dishes</h2>
+            <p>Made for sharing, or not</p>
+          </div>
+          <div class="menu-list">
+            <article class="menu-dish">
+              <img src="assets/img/ensalada_caprese.png" alt="Tomato and mozzarella caprese salad" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Ensalada Caprese</h3><span>€10.50</span></div>
+                <p>Ripe tomatoes, mozzarella, basil and a bright herb dressing.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/iggybab.png" alt="Iggybab dish" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Iggybab</h3><span>€13.00</span></div>
+                <p>A favourite from Tonio's kitchen.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/lasaña_requiem_con_vieira.png" alt="Lasagna with scallop" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Lasaña Requiem con Vieira</h3><span>€17.00</span></div>
+                <p>Slow-baked layers of pasta, rich ragù and a delicate scallop.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/mooshed_pucciatos.png" alt="Creamy mashed potatoes with herbs" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Mooshed Pucciatos</h3><span>€12.00</span></div>
+                <p>Silky mashed potatoes with butter, herbs and garden vegetables.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="menu-category" id="dessert" aria-labelledby="dessert-title">
+          <div class="menu-category-heading">
+            <span>05</span>
+            <h2 id="dessert-title">Desserts / Breakfast</h2>
+            <p>Save room for dessert</p>
+          </div>
+          <div class="menu-list">
+            <article class="menu-dish">
+              <img src="assets/img/tarta_de_queso.png" alt="Cheesecake with berries" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Tarta de Queso</h3><span>€7.00</span></div>
+                <p>Silky baked cheesecake finished with a bright berry sauce.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/pudin_con_salsa_de_carqamelo.png" alt="Caramel pudding" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Pudin con Salsa de Caramelo</h3><span>€6.50</span></div>
+                <p>Classic set custard with a glossy caramel sauce.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/sorbete_de_limon.png" alt="Lemon sorbet with mint" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Sorbete de Limón</h3><span>€5.50</span></div>
+                <p>Fresh lemon sorbet with mint, cool and wonderfully light.</p>
+              </div>
+            </article>
+            <article class="menu-dish">
+              <img src="assets/img/da_world_panckacki.png" alt="Da World Panckaki pancakes" />
+              <div class="menu-dish-details">
+                <div class="menu-dish-heading"><h3>Da World Panckaki</h3><span>€14.00</span></div>
+                <p>Fluffy pancakes served with seasonal berries.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <p class="menu-note">Please let us know about allergies or dietary requirements. Prices include VAT.</p>
       </div>
-    </div>
-
-    <!--  -->
+    </main>
 
     <section class="page-section cta">
       <div class="container">
