@@ -8013,6 +8013,11 @@ textarea.form-control-lg {
   text-decoration: underline !important;
 }
 
+.text-decoration-soft-underline {
+  border-bottom: 1px solid black;
+
+}
+
 .text-decoration-line-through {
   text-decoration: line-through !important;
 }
@@ -10934,6 +10939,10 @@ p {
   #mainNav .navbar-nav .nav-item.active .nav-link:hover {
     color: var(--tonio-gold-soft);
   }
+  #mainNav .menu-right {
+    position: absolute;
+    right:15rem;
+  }
 }
 
 .btn {
@@ -10985,6 +10994,7 @@ p {
   border-radius: 1.5rem;
   box-shadow: 0 20px 40px rgba(44, 28, 22, 0.12);
 }
+
 .cta .cta-inner {
   position: relative;
   padding: 3rem 3.25rem;
