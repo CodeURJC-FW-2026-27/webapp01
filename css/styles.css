@@ -11446,4 +11446,27 @@ p {
   .menu-dish-heading h3 {
     font-size: 0.98rem;
   }
+
+  
+/* Phones: 1 column */
+.menu-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/* Small Screens: 2 columns */
+@media (min-width: 768px) {
+    .menu-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Big screens: 3columns */
+@media (min-width: 992px) {
+    .menu-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 }
