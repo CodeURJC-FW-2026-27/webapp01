@@ -8,7 +8,7 @@
     <meta name="description"
         content="Reserve your table at Diamond is Unbreakable and enjoy a unique dining experience inspired by JoJo’s epic energy, refined flavors, and Tonio’s legendary kitchen." />
     <meta name="author" content="" />
-    <title>Diamond is Unbreakable - Reserve</title>
+    <title>Diamond is Unbreakable - New Dish</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <link rel="stylesheet" href="css\new_dish.css">
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -68,10 +68,10 @@
 
                             <label for="newdishHealingProperties" class="form-label text-start d-block">Enter Dish
                                 Healing Properties</label>
-                            <input type="text" class="form-control mb-5" name="" id="newdishHealingProperties">
+                            <input type="text" class="form-control mb-5" name="newdishHealingProperties" placeholder="Remember to be specific" id="newdishHealingProperties">
 
                             <label for="newdishTypeofmeal" class="form-label text-start d-block">Type of Meal</label>
-                            <select name="newdishTypeofmeal" id="newdishTypeofmeal" required class="form-control mb-5">
+                            <select name="newdishTypeofmeal" id="newdishTypeofmeal" required class="form-select mb-5">
                                 <option value="desert/breakfast">Breakfast</option>
                                 <option value="drinks">Drinks</option>
                                 <option value="main courses">Main courses</option>
@@ -79,7 +79,7 @@
                             </select>
 
                             <label for="newdishChef" class="form-label text-start d-block">Chef</label>
-                            <select name="newdishChef" id="newdishChef" required class="form-control mb-5">
+                            <select name="newdishChef" id="newdishChef" required class="form-select mb-5">
                                 <option value="Tonio">Tonio Trussardi</option>
                                 <option value="Joestar Giovanna">Joestar Giovanna</option>
                                 <option value="Bruno Bucciarati">Bruno Bucciarati</option>
@@ -106,7 +106,14 @@
                             <input type="file" name="newDishImage" id="newDishImage" class="form-control mb-5">
 
                         </div>
-                        <button type="submit" class="btn btn-secondary btn-xl">Submit</button>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button class="btn btn-primary btn-lg" type="submit">Guardar</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <button class="btn btn-secondary btn-lg" type="reset">Cancelar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
