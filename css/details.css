@@ -1,0 +1,41 @@
+.precio {
+  font-family: 'Playfair Display', serif;
+  font-size:4rem;
+  color: var(--tonio-red);
+}
+
+.desc {
+  font-size:1.25rem;
+}
+
+.imagen-pequeña {
+  width: 100px;
+  height: auto;
+}
+
+.retrato {
+  border: white solid 1px;
+  width:25rem;
+  height:auto;
+}
+
+.alergenos {
+ background: var(--tonio-red);
+ color:white;
+ display: flex;
+ flex-direction:row;
+ justify-content: space-around;
+ margin-top:15rem !important;
+ font-weight:bold;
+ border-radius: 0.5rem;
+}
+
+.critic-review {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  color: var(--tonio-red-dark);
+  background-color: var(--tonio-gold);
+  justify-content: center;
+}

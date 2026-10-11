@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
+   <link href="css/menu.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -35,22 +36,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase" href="index.html">Home</a>
+          <li class="nav-item px-lg-4 active">
+            <a class="nav-link text-uppercase" href="index.html" aria-current="page">Home</a>
           </li>
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase" href="about.html">About</a>
+            <a class="nav-link text-uppercase" href="pages/about.html">About</a>
           </li>
-          <!-- <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase" href="products.html">Menu</a>  -->
           </li>
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase" href="store.html">Reserve</a>
+            <a class="nav-link text-uppercase" href="pages/store.html">Reserve</a>
           </li>
         </ul>
         <ul class="navbar-nav mx-auto menu-right">
           <li class="nav-item px-lg-4 btn btn-primary">
-            <a class="nav-link text-uppercase" href="new_dish.html">NEW DISH</a>
+            <a class="nav-link text-uppercase" href="pages/new_dish.html">NEW DISH</a>
           </li>
         </ul>
       </div>
@@ -106,10 +105,11 @@
           <h2 id="drinks-title">Drinks</h2>
           <p>A toast to good company</p>
         </div>
-        <div class="menu-list">
+        <!-- Bootstrap row-cols: 1 column on mobile, 2 at md, and 3 at lg. -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list">
 
 
-          <a href="dish_detail_beer.html" class="dish-link">
+          <a href="pages/details/dish_detail_beer.html" class="dish-link">
             <article class="menu-dish">
               <img src="assets/img/cerveza.png" alt="Glass of beer" />
               <div class="menu-dish-details">
@@ -154,7 +154,7 @@
           <h2 id="starter-title">Starters</h2>
           <p>A little something for the table</p>
         </div>
-        <div class="menu-list">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list">
 
           <a href="dish_detail.html?id=4" class="dish-link">
             <article class="menu-dish">
@@ -203,7 +203,7 @@
           <h2 id="main-course-title">Main Courses</h2>
           <p>Tonio's signature dishes</p>
         </div>
-        <div class="menu-list">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list">
 
           <a href="dish_detail.html?id=7" class="dish-link">
 
@@ -273,7 +273,7 @@
           <h2 id="side-dish-title">Side Dishes</h2>
           <p>Made for sharing, or not</p>
         </div>
-        <div class="menu-list">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list">
 
           <a href="dish_detail.html?id=12" class="dish-link">
             <article class="menu-dish">
@@ -330,7 +330,7 @@
           <h2 id="dessert-title">Desserts / Breakfast</h2>
           <p>Save room for dessert</p>
         </div>
-        <div class="menu-list">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list">
           <a href="dish_detail.html?id=16" class="dish-link">
             <article class="menu-dish">
               <img src="assets/img/tarta_de_queso.png" alt="Cheesecake with berries" />
