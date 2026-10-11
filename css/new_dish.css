@@ -5,3 +5,51 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: "Raleway", sans-serif;
 }
+
+.dish-form {
+    text-align: left;
+    color: var(--tonio-brown);
+}
+
+.dish-form .form-label {
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
+.dish-form .form-control,
+.dish-form .form-select {
+    color: var(--tonio-brown);
+    background-color: var(--tonio-ivory);
+    border-color: rgba(47, 21, 15, 0.2);
+}
+
+.dish-form .form-control:focus,
+.dish-form .form-select:focus {
+    border-color: var(--tonio-gold);
+    box-shadow: 0 0 0 0.15rem rgba(215, 167, 94, 0.2);
+}
+
+.dish-form .btn {
+    min-height: 48px;
+}
+
+.imagen_newdish {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+/* Make de image smaller in mobile devices */
+@media(max-width: 768px) {
+    .imagen_newdish {
+        width: 50%;
+        height: auto;
+        padding: 0px;
+        margin : 0px;
+
+    }
+}
+
+
+
