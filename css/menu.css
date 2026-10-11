@@ -46,6 +46,15 @@
   border-bottom: 3px solid var(--tonio-gold);
 }
 
+.menu-hero-sample {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  color: var(--tonio-ivory);
+  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../assets/img/backgroundtonios2.png") center 20% / cover;
+  border-bottom: 3px solid var(--tonio-gold);
+}
+
 .menu-hero-content {
   padding-top: 4rem;
   padding-bottom: 4rem;

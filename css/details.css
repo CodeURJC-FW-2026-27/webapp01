@@ -1,15 +1,21 @@
 .precio {
   font-family: 'Playfair Display', serif;
-  font-size:4rem;
+  font-size: 2.5rem !important;
   color: var(--tonio-red);
 }
+
 
 .desc {
   font-size:1.25rem;
 }
 
+.chef {
+  font-size:1.5rem;
+  color:var(--tonio-red);
+}
+
 .imagen-pequeña {
-  width: 100px;
+  width: 60px;
   height: auto;
 }
 
@@ -25,17 +31,97 @@
  display: flex;
  flex-direction:row;
  justify-content: space-around;
- margin-top:15rem !important;
+ margin-top:12rem !important;
  font-weight:bold;
  border-radius: 0.5rem;
 }
 
+
 .critic-review {
-  display: block;
+  display: flex;
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.12rem;
   color: var(--tonio-red-dark);
   background-color: var(--tonio-gold);
   justify-content: center;
+  align-items: bottom;
+  text-align: center;
+  height: 2rem;
+  width: 12rem;
+  border-radius: 8px;
+  margin:0;
+}
+
+
+.info {
+  font-size:1rem;
+  color: var(--tonio-red-dark);
+  font-weight:lighter;
+}
+
+.btn-tertiary {
+  --bs-btn-color: #9e822f;
+  --bs-btn-bg: #ebce86ad;
+  --bs-btn-border-color: #e7cf94c9;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #28140d;
+  --bs-btn-hover-border-color: #26120c;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #26120c;
+  --bs-btn-active-border-color: #23110b;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #2F170F;
+  --bs-btn-disabled-border-color: #2F170F;
+  box-shadow:none !important;
+}
+
+@media (min-width: 768px) {
+  .precio {
+    font-size: 3.5rem !important;
+  }
+}
+
+@media (max-width:400px ){
+
+  .alergenos li {
+    font-size:0.8rem;
+  }
+}
+}
+
+
+@media (max-width: 450px) {
+
+  .precio {
+    font-weight:bold;
+  }
+
+  .critic-review {
+  display: flex;
+  justify-content: center;
+  align-items: bottom;
+
+   width: 120px;
+
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12rem;
+  color: var(--tonio-red-dark);
+  background-color: var(--tonio-gold);
+  text-align: center;
+
+  border-radius: 8px;
+  margin:0;
+}
+
+.review {
+  border:black solid 0.75px;
+  border-radius:15px;
+  width:9rem;
+  height:5rem;
+  align-items:center;
+  justify-content:center;
+}
+
 }

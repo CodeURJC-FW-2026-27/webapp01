@@ -11139,6 +11139,15 @@ p {
   }
 }
 
+.product-item-img {
+  width: max-content !important;
+  max-width: 900px !important;
+  height: auto !important;
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .list-hours {
   font-size: 0.9rem;
 }
