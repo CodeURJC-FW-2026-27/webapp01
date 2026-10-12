@@ -91,3 +91,23 @@ I was responsible for defining the application's standard colors and styling gui
 - `new_dish.css`
 
 
+### Diana Grovas
+
+I was responsible for the initial creation of the New Dish page, including its initial navigation button and the preliminary styling of the form. I also built the complete, responsive Detail page and replicated it for all existing dishes with their corresponding data.
+
+**My most significant commits were:**
+
+- [New dish page and nav](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/94e98095decb9a29bb754188ca0bdafc963a6188)
+- [detail_page_v2 desing and responsive](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/770d8b8f7d2971375bd4ab6216b6c0b3fe09d1db)
+- [Adding of the remaining dishes + responsive fix](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/8db5b5e2a645f339d5cbf6f51e5c6aeeae567237)
+- [Detail Page New Ingredient, add header and footer](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4116bed51f304f5b4cbdeaa432cca67cdc9f0049)
+
+
+
+**Files I've contributed to:**
+- `README.md`
+- `new_dish.html`
+- `styles.css`
+- `menu.css`
+- `pages/details/`   Contribution to the detail page: 19 Dishes
+
