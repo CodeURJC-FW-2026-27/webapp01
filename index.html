@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
-   <link href="css/menu.css" rel="stylesheet" />
+  <link href="css/menu.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -47,11 +47,11 @@
             <a class="nav-link text-uppercase" href="pages/store.html">Reserve</a>
           </li>
         </ul>
-        <ul class="navbar-nav mx-auto menu-right">
+        <!-- <ul class="navbar-nav mx-auto menu-right">
           <li class="nav-item px-lg-4 btn btn-primary">
             <a class="nav-link text-uppercase" href="pages/new_dish.html">NEW DISH</a>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </nav>
@@ -89,16 +89,31 @@
       </div>
     </section>
 
-     <!-- Mini menu for id addressing -->
+    <!-- Mini menu for id addressing -->
     <nav class="container menu-jump" aria-label="Menu categories">
       <a href="#drinks">Drinks</a>
       <a href="#starter">Starters</a>
       <a href="#main-course">Main Courses</a>
       <a href="#side-dish">Side Dishes</a>
       <a href="#dessert">Desserts / Breakfast</a>
+
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar...">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+      </form>
+
     </nav>
-     <!-- Here starts the content for the menu (grid with the entities) -->
+    <!-- Here starts the content for the menu (grid with the entities) -->
     <div class="container menu-content">
+
+      <div class="d-flex">
+        <div class="d-inline-flex btn btn-primary ms-auto">
+          <a class="nav-link text-uppercase" href="pages/new_dish.html">
+            NEW DISH
+          </a>
+        </div>
+      </div>
+
       <section class="menu-category" id="drinks" aria-labelledby="drinks-title">
         <div class="menu-category-heading">
           <span>01</span>
