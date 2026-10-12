@@ -332,5 +332,9 @@
   .menu-dish-heading h3 {
     font-size: 0.98rem;
   }
+  .btn.btn-primary {
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+}
 
 }
