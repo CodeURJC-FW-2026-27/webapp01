@@ -24,5 +24,36 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 ### Filter:
 - Type of meal (Antipasti, pasta, pizza, dessert...)
 - Vegan dishes
+
+# Practice 1
+
+## Main Page:
+
+<img width="1835" height="932" alt="image" src="https://github.com/user-attachments/assets/9b246317-7dd4-4efa-95e3-a17f8b982a37" />
+<img width="1845" height="937" alt="image" src="https://github.com/user-attachments/assets/aec7bdce-ecf8-48c5-8bbe-ef3de9ce9326" />
+<img width="1838" height="928" alt="image" src="https://github.com/user-attachments/assets/79ea4976-9d5e-4a0a-8a54-2f0ba30cfbd2" />
+<img width="1835" height="929" alt="image" src="https://github.com/user-attachments/assets/6fee0ea6-215a-4a7a-919e-8ab370c19069" />
+<img width="1837" height="927" alt="image" src="https://github.com/user-attachments/assets/7415ba4a-6290-4d9b-9447-51c611d6b378" />
+<img width="1838" height="927" alt="image" src="https://github.com/user-attachments/assets/b4fac773-681d-43e0-bde1-2bc70ea84268" />
+
+## Detail Page
+
+<img width="1846" height="926" alt="image" src="https://github.com/user-attachments/assets/c87c5930-436a-403f-8051-d71dfe8514c6" />
+<img width="1832" height="584" alt="image" src="https://github.com/user-attachments/assets/9496b15a-a807-4629-8e82-a7c882367db0" />
+
+## New dish Page
+
+<img width="1836" height="923" alt="image" src="https://github.com/user-attachments/assets/a64392d5-7124-4d73-8523-557ba0db7465" />
+<img width="1842" height="930" alt="image" src="https://github.com/user-attachments/assets/1af60918-535a-4f6d-94d8-c6be515f87bb" />
+<img width="1834" height="924" alt="image" src="https://github.com/user-attachments/assets/4f3f0543-9dc3-4649-9da8-0643c6beb902" />
+<img width="1843" height="933" alt="image" src="https://github.com/user-attachments/assets/a268157b-b045-4829-9bf6-362522028f9a" />
+
+
+
+
+
+
+
+
 - Organic dishes
 - Celiac dishes
