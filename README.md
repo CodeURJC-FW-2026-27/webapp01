@@ -24,6 +24,8 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 ### Filter:
 - Type of meal (Antipasti, pasta, pizza, dessert...)
 - Vegan dishes
+- Organic dishes
+- Celiac dishes
 
 # Practice 1
 
@@ -66,12 +68,3 @@ I was assigned to partially fix the New Entity page and implement a unique link 
 - `new_dish.html`
 - `styles.css`
 
-
-
-
-
-
-
-
-- Organic dishes
-- Celiac dishes
