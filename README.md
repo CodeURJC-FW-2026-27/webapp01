@@ -68,3 +68,26 @@ I was assigned to partially fix the New Entity page and implement a unique link 
 - `new_dish.html`
 - `styles.css`
 
+
+### Álvaro Blanco
+
+I was responsible for defining the application's standard colors and styling guidelines to ensure a consistent design across the project. I created the About, Store, and Index pages, including the Bootstrap grid-based menu on the Index page. I also made most of the pages responsive and helped improve the appearance and responsive design of the New Dish page.
+
+**My most significant commits were:**
+
+- [Addig styles, background, text accompanying the restaurnat lore -Home and -About pages change](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/083e21c0fdba4d81939ee0476eb3e30c4ea2b3c0)
+- [Reserve page done,fix merge conflict , prettier text adding info and titles, changing he footer and favicon, removing some usless image)](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/077ee82a517e504e5acf867d6f2093ac90553a7a)
+- [Adding the dishes style/info and all of that menu funcionality](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/c82b8f3aca06f3c91b046df06e35327182b86018)
+- [Boostrap grid, responsive layout pages to the windows sizes , organize carpet s and files , fix some layaouts errors too](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/db3adcfaf3c2ce2356d2be85b9ecff7c63fd4554)
+
+**Files I've contributed to:**
+- `index.html`
+- `about.html`
+- `store.html`
+- `new_dish.html`
+- `styles.css`
+- `menu.css`
+- `details.css`
+- `new_dish.css`
+
+
