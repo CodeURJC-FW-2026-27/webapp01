@@ -38,17 +38,19 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 <img width="1837" height="927" alt="image" src="https://github.com/user-attachments/assets/7415ba4a-6290-4d9b-9447-51c611d6b378" />
 <img width="1838" height="927" alt="image" src="https://github.com/user-attachments/assets/b4fac773-681d-43e0-bde1-2bc70ea84268" />
 
-## Detail Page
+## New dish Page
 
 <img width="1846" height="926" alt="image" src="https://github.com/user-attachments/assets/c87c5930-436a-403f-8051-d71dfe8514c6" />
 <img width="1832" height="584" alt="image" src="https://github.com/user-attachments/assets/9496b15a-a807-4629-8e82-a7c882367db0" />
 
-## New dish Page
+## Detail Page
 
-<img width="1836" height="923" alt="image" src="https://github.com/user-attachments/assets/a64392d5-7124-4d73-8523-557ba0db7465" />
-<img width="1842" height="930" alt="image" src="https://github.com/user-attachments/assets/1af60918-535a-4f6d-94d8-c6be515f87bb" />
-<img width="1834" height="924" alt="image" src="https://github.com/user-attachments/assets/4f3f0543-9dc3-4649-9da8-0643c6beb902" />
-<img width="1843" height="933" alt="image" src="https://github.com/user-attachments/assets/a268157b-b045-4829-9bf6-362522028f9a" />
+<img width="1424" height="628" alt="image" src="https://github.com/user-attachments/assets/44df39c5-5c59-4374-9ea6-49eab2ed97fe" />
+<img width="1424" height="894" alt="image" src="https://github.com/user-attachments/assets/43ec1339-39e3-4c32-aa9e-24cac8aefafd" />
+<img width="1422" height="900" alt="image" src="https://github.com/user-attachments/assets/8933c434-6807-446b-b9dd-9aa8ba489f57" />
+<img width="1420" height="648" alt="image" src="https://github.com/user-attachments/assets/b836a21b-0fcf-4c78-aa98-62300a528d2b" />
+<img width="1424" height="900" alt="image" src="https://github.com/user-attachments/assets/f7ec4d34-d0bc-41cc-80db-561da2eae2aa" />
+<img width="1424" height="164" alt="image" src="https://github.com/user-attachments/assets/171fe9db-7701-4e27-aa1d-50e392188820" />
 
 
 ### Javier Méndez
