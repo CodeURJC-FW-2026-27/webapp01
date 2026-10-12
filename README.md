@@ -49,6 +49,24 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 <img width="1843" height="933" alt="image" src="https://github.com/user-attachments/assets/a268157b-b045-4829-9bf6-362522028f9a" />
 
 
+### Javier Méndez
+
+I was assigned to partially fix the New Entity page and implement a unique link for each dish on the Main Page, using its ID so that it can later be identified with JavaScript. I also reviewed the project documentation and implemented the search bar in the Main Page header.
+
+**My most significant commits were:**
+
+- [Implemented the search bar, adjusted the new dish rating, and repositioned the New Dish button](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/91ddedb8e98e9357459b2a94652c10a49888a607)
+- [Corrected comments written in Spanish (pending a second review)](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/deea58b8e0d3128c427a8d01a4a2e883def8331c)
+- [Implemented unique links for each dish in preparation for the detail page](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/5a8bc3056ef2913bd9781ec260f2d736f24a7d24)
+- [Partially fixed the New Entity page](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4dc7242717666275d264bb8a5a159aca26513ef9)
+
+**Files I've contributed to:**
+- `README.md`
+- `index.html`
+- `new_dish.html`
+- `styles.css`
+
+
 
 
 
