@@ -76,6 +76,22 @@
   box-shadow:none !important;
 }
 
+.btn-dish {
+    --bs-btn-color: #f9f9f9;
+  --bs-btn-bg: #3f1e09;
+  --bs-btn-border-color: #45220d;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #28140d;
+  --bs-btn-hover-border-color: #26120c;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #26120c;
+  --bs-btn-active-border-color: #23110b;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #2F170F;
+  --bs-btn-disabled-border-color: #2F170F;
+}
+
+
 .product-item .product-item-img {
   max-width: min(100%, 900px);
 }

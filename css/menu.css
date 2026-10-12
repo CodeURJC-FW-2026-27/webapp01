@@ -133,6 +133,17 @@
   font-size:2rem;
 }
 
+.menu-description-row {
+  padding: 2.6rem 0 1.2rem;
+  border-bottom: 2px solid rgba(125, 31, 31, 0.55);
+}
+
+.menu-description-row .menu-description {
+  margin: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+
 .menu-category-heading > span {
   color: var(--tonio-red);
   font-family: "Raleway", sans-serif;
