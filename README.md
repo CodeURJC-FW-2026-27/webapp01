@@ -65,10 +65,10 @@ I was assigned to partially fix the New Entity page and implement a unique link 
 - [Partially fixed the New Entity page](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4dc7242717666275d264bb8a5a159aca26513ef9)
 
 **Files I've contributed to:**
-- `README.md`
 - `index.html`
 - `new_dish.html`
 - `styles.css`
+- `README.md`
 
 
 ### Álvaro Blanco
@@ -107,9 +107,10 @@ I was responsible for the initial creation of the New Dish page, including its i
 
 
 **Files I've contributed to:**
-- `README.md`
 - `new_dish.html`
 - `styles.css`
 - `menu.css`
+- `details.css`
 - `pages/details/`   Contribution to the detail page: 19 Dishes
+- `README.md`
 
