@@ -143,5 +143,12 @@
   align-items:center;
   justify-content:center;
 }
+@media (max-width: 767.98px) {
+  .boton-return-page {
+    display: block;
+    width: 100%;
+  }
+}
+
 
 }

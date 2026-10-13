@@ -38,17 +38,19 @@ This website is inspired by the *JoJo's Bizarre Adventure* series specifically T
 <img width="1837" height="927" alt="image" src="https://github.com/user-attachments/assets/7415ba4a-6290-4d9b-9447-51c611d6b378" />
 <img width="1838" height="927" alt="image" src="https://github.com/user-attachments/assets/b4fac773-681d-43e0-bde1-2bc70ea84268" />
 
-## Detail Page
+## New dish Page
 
 <img width="1846" height="926" alt="image" src="https://github.com/user-attachments/assets/c87c5930-436a-403f-8051-d71dfe8514c6" />
 <img width="1832" height="584" alt="image" src="https://github.com/user-attachments/assets/9496b15a-a807-4629-8e82-a7c882367db0" />
 
-## New dish Page
+## Detail Page
 
-<img width="1836" height="923" alt="image" src="https://github.com/user-attachments/assets/a64392d5-7124-4d73-8523-557ba0db7465" />
-<img width="1842" height="930" alt="image" src="https://github.com/user-attachments/assets/1af60918-535a-4f6d-94d8-c6be515f87bb" />
-<img width="1834" height="924" alt="image" src="https://github.com/user-attachments/assets/4f3f0543-9dc3-4649-9da8-0643c6beb902" />
-<img width="1843" height="933" alt="image" src="https://github.com/user-attachments/assets/a268157b-b045-4829-9bf6-362522028f9a" />
+<img width="1424" height="628" alt="image" src="https://github.com/user-attachments/assets/44df39c5-5c59-4374-9ea6-49eab2ed97fe" />
+<img width="1424" height="894" alt="image" src="https://github.com/user-attachments/assets/43ec1339-39e3-4c32-aa9e-24cac8aefafd" />
+<img width="1422" height="900" alt="image" src="https://github.com/user-attachments/assets/8933c434-6807-446b-b9dd-9aa8ba489f57" />
+<img width="1420" height="648" alt="image" src="https://github.com/user-attachments/assets/b836a21b-0fcf-4c78-aa98-62300a528d2b" />
+<img width="1424" height="900" alt="image" src="https://github.com/user-attachments/assets/f7ec4d34-d0bc-41cc-80db-561da2eae2aa" />
+<img width="1424" height="164" alt="image" src="https://github.com/user-attachments/assets/171fe9db-7701-4e27-aa1d-50e392188820" />
 
 
 ### Javier Méndez
@@ -90,4 +92,24 @@ I was responsible for defining the application's standard colors and styling gui
 - `details.css`
 - `new_dish.css`
 
+
+### Diana Grovas
+
+I was responsible for the initial creation of the New Dish page, including its initial navigation button and the preliminary styling of the form. I also built the complete, responsive Detail page and replicated it for all existing dishes with their corresponding data.
+
+**My most significant commits were:**
+
+- [New dish page and nav](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/94e98095decb9a29bb754188ca0bdafc963a6188)
+- [detail_page_v2 desing and responsive](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/770d8b8f7d2971375bd4ab6216b6c0b3fe09d1db)
+- [Adding of the remaining dishes + responsive fix](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/8db5b5e2a645f339d5cbf6f51e5c6aeeae567237)
+- [Detail Page New Ingredient, add header and footer](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4116bed51f304f5b4cbdeaa432cca67cdc9f0049)
+
+
+
+**Files I've contributed to:**
+- `README.md`
+- `new_dish.html`
+- `styles.css`
+- `menu.css`
+- `pages/details/`   Contribution to the detail page: 19 Dishes
 
