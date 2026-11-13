@@ -42,7 +42,7 @@
   min-height: 24rem;
   align-items: center;
   color: var(--tonio-ivory);
-  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../assets/img/restaurantinside.png") center 54% / cover;
+  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../images/restaurantinside.png") center 54% / cover;
   border-bottom: 3px solid var(--tonio-gold);
 }
 
@@ -51,7 +51,7 @@
   min-height: 3rem;
   align-items: center;
   color: var(--tonio-ivory);
-  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../assets/img/backgroundtonios2.png") center 20% / cover;
+  background: linear-gradient(90deg, rgba(23, 13, 11, 0.88), rgba(23, 13, 11, 0.2)), url("../images/backgroundtonios2.png") center 20% / cover;
   border-bottom: 3px solid var(--tonio-gold);
 }
 

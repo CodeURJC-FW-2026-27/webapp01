@@ -1,0 +1,1035 @@
+[
+  {
+    "name": "Overdrive de Almejas al Limón",
+    "Healing properties": "Remedy for Anemia.",
+    "Dish description": "Seasonal Clams with Lemon.",
+    "Type of meal": "Starters",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4.7,
+    "Price": 18.5,
+    "filename": "overdrive_de_almejas_al_limon.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500bb"},
+        "name": "Lemon",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500bc"},
+        "name": "Clam",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500bd"},
+        "name": "Parsley",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500be"},
+        "name": "Garlic",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Cerveza",
+    "Healing properties": "Improved blood flow",
+    "Dish description": "Craft barley beer",
+    "Type of meal": "Drinks",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 5,
+    "Price": 4.5,
+    "filename": "cerveza.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500bf"},
+        "name": "Barley",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c0"},
+        "name": "Hops",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c1"},
+        "name": "Water",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c2"},
+        "name": "Yeast",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Magician's Red Bravas Verde",
+    "Healing properties": "Treats borderline personality disorder.",
+    "Dish description": "French fries that are crispy on the outside and tender on the inside, served with homemade salsa brava and a mild aioli sauce.",
+    "Type of meal": "Starters",
+    "Chef": "Bruno Bucciarati",
+    "Food critic review": 4.6,
+    "Price": 8.5,
+    "filename": "magicians_red_bravas_verde.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c3"},
+        "name": "Potato",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c4"},
+        "name": "Tomato",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c5"},
+        "name": "Paprika",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c6"},
+        "name": "Cayenne",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c7"},
+        "name": "Garlic",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c8"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500c9"},
+        "name": "Egg",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ca"},
+        "name": "Salt",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Tarta de queso",
+    "Healing properties": "Remedy for muscle soreness.",
+    "Dish description": "Stone-baked cheesecake made with organic cheese and wild berry jam.",
+    "Type of meal": "Desserts / Breakfast",
+    "Chef": "Ciocolata Sorbett",
+    "Food critic review": 4.8,
+    "Price": 6.5,
+    "filename": "tarta_de_queso.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500cb"},
+        "name": "Organic cheese",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500cc"},
+        "name": "Biscuit",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500cd"},
+        "name": "Jam",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Lamb Chops with Apple Sauce",
+    "Healing properties": "It relieves stomachaches and constipation.",
+    "Dish description": "Lamb chops topped with sweet-and-sour apple sauce and served with asparagus.",
+    "Type of meal": "Main Courses",
+    "Chef": "Brando d'Abruzzo",
+    "Food critic review": 4.7,
+    "Price": 24.99,
+    "filename": "lamb_chops_with_apple_sauce.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ce"},
+        "name": "Lamb",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500cf"},
+        "name": "Apple",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d0"},
+        "name": "Asparagus",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d1"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Muda Muda Bites",
+    "Healing properties": "Remedy for scoliosis.",
+    "Dish description": "Cures kleptomania.",
+    "Type of meal": "Starters",
+    "Chef": "Joestar Giovanna",
+    "Food critic review": 4.7,
+    "Price": 8.99,
+    "filename": "muda_muda_bites.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d2"},
+        "name": "Serrano ham",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d3"},
+        "name": "Milk",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d4"},
+        "name": "Harina de trigo",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d5"},
+        "name": "Butter",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d6"},
+        "name": "Egg",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d7"},
+        "name": "Breadcrumbs",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d8"},
+        "name": "Nutmeg",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500d9"},
+        "name": "Pepper",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500da"},
+        "name": "Salt",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500db"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Iggybab",
+    "Healing properties": "Cures depression.",
+    "Dish description": "Pita bread stuffed with kebab meat, lettuce, tomato, onion, and yogurt sauce.",
+    "Type of meal": "Side Dishes",
+    "Chef": "Brando d'Abruzzo",
+    "Food critic review": 4.8,
+    "Price": 13.99,
+    "filename": "iggybab.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500dc"},
+        "name": "Pita bread",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500dd"},
+        "name": "Kebab meat",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500de"},
+        "name": "Lettuce",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500df"},
+        "name": "Tomato",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e0"},
+        "name": "Onion",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e1"},
+        "name": "Yogurt sauce",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e2"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e3"},
+        "name": "Spices",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Lasaña requiem con Vieira",
+    "Healing properties": "Helps regain energy and improves blood circulation.",
+    "Dish description": "Lasagna made with chef's special crepes, accompanied by butter-sautéed scallops, black olive and porcini mushroom duxelles, anchovy-marinated cherry tomatoes, micro-basil, and balsamic glaze.",
+    "Type of meal": "Side Dishes",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4.9,
+    "Price": 27.99,
+    "filename": "lasana_requiem_con_vieira.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e4"},
+        "name": "Crepe-lasagna",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e5"},
+        "name": "Scallop",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e6"},
+        "name": "Butter",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e7"},
+        "name": "Black olives",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e8"},
+        "name": "Porcini mushrooms",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500e9"},
+        "name": "Cherry tomatoes",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ea"},
+        "name": "Anchovy",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500eb"},
+        "name": "Micro-basil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ec"},
+        "name": "Balsamic glaze",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Made in Heaven",
+    "Healing properties": "Instantly restores all broken or damaged bones.",
+    "Dish description": "White rice accompanied by tomato sauce, a fried egg, red peppers and roasted potatoes, presented in a tower.",
+    "Type of meal": "Main Courses",
+    "Chef": "Joestar Giovanna",
+    "Food critic review": 4.8,
+    "Price": 14.99,
+    "filename": "made_in_heaven.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ed"},
+        "name": "Rice",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ee"},
+        "name": "Egg",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ef"},
+        "name": "Tomato Sauce",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f0"},
+        "name": "Red Pepper",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f1"},
+        "name": "Potato",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f2"},
+        "name": "Parsley",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Meat Explosion",
+    "Healing properties": "Cures all diseases located in the pancreas.",
+    "Dish description": "Gourmet grilled beef burger, topped with cheddar cheese, fresh lettuce, tomato, caramelized onion, and special crimson sauce, served on a brioche bun.",
+    "Type of meal": "Main Courses",
+    "Chef": "Gio-Gio Gourmand",
+    "Food critic review": 4.8,
+    "Price": 14.99,
+    "filename": "meat_explosion.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f3"},
+        "name": "Beef",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f4"},
+        "name": "Cheddar cheese",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f5"},
+        "name": "Brioche bun",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f6"},
+        "name": "Lettuce",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f7"},
+        "name": "Tomato",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f8"},
+        "name": "Caramelized onion",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500f9"},
+        "name": "Special sauce",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Mooshed pucciatos",
+    "Healing properties": "Restores and strengthens hair, promoting the natural recovery of the scalp and progressively restoring its vitality and density.",
+    "Dish description": "A creamy and smooth artisanal mashed potato, made with selected potatoes, butter, and milk. Its velvety texture and delicate flavor make it a comforting and versatile side dish.",
+    "Type of meal": "Side Dishes",
+    "Chef": "Gio-Gio Gourmand",
+    "Food critic review": 3.8,
+    "Price": 5.99,
+    "filename": "mooshed_pucciatos.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500fa"},
+        "name": "Potato",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500fb"},
+        "name": "Butter",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500fc"},
+        "name": "Milk",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Da World Panckaki",
+    "Healing properties": "Instantly cures cataracts, retinal injuries, and eye strain, leaving eyes with perfect acuity and a sparkle in the pupils for hours.",
+    "Dish description": "A generous stack of fluffy artisanal pancakes drizzled with premium maple syrup and whipped cream. The dish is garnished with a selection of fresh berries (blueberries and raspberries), edible flowers, and elegant decorative swirls of caramel and coulis.",
+    "Type of meal": "Desserts / Breakfast",
+    "Chef": "Ciocolata Sorbett",
+    "Food critic review": 3,
+    "Price": 8.99,
+    "filename": "da_world_panckaki.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500fd"},
+        "name": "Pancake batter",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500fe"},
+        "name": "Maple syrup",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd500ff"},
+        "name": "Whipped cream",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50100"},
+        "name": "Blueberries",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50101"},
+        "name": "Raspberries",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50102"},
+        "name": "Edible flowers",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50103"},
+        "name": "Caramel",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Pudin con Salsa de Caramelo",
+    "Healing properties": "Cures athlete's foot.",
+    "Dish description": "Smooth-textured homemade pudding served with caramel sauce.",
+    "Type of meal": "Desserts / Breakfast",
+    "Chef": "Ciocolata Sorbett",
+    "Food critic review": 4.6,
+    "Price": 8.99,
+    "filename": "pudin_con_salsa_de_caramelo.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50104"},
+        "name": "Milk",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50105"},
+        "name": "Egg",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50106"},
+        "name": "Sugar",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50107"},
+        "name": "Wheat flour",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50108"},
+        "name": "Vanilla",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50109"},
+        "name": "Caramel",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Ensalada Caprese",
+    "Healing properties": "Cures shoulder stiffness and helps remove dead skin.",
+    "Dish description": "Salad made of four slices of mozzarella and five slices of tomato with a special dressing of anchovy, seaweed, olive oil, white wine vinegar, lemon juice, salt, pepper, and basil, served with lettuce.",
+    "Type of meal": "Side Dishes",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4.9,
+    "Price": 12.5,
+    "filename": "ensalada_caprese.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010a"},
+        "name": "Mozzarella",
+        "Lactose intolerancy": true,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010b"},
+        "name": "Tomato",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010c"},
+        "name": "Anchovy",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010d"},
+        "name": "Seaweed",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010e"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5010f"},
+        "name": "White wine vinegar",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50110"},
+        "name": "Lemon juice",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50111"},
+        "name": "Salt",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50112"},
+        "name": "Pepper",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50113"},
+        "name": "Basil",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50114"},
+        "name": "Lettuce",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Sashimi Imperial del Mar",
+    "Healing properties": "Improves concentration and helps restore physical balance.",
+    "Dish description": "Great selection of fresh sashimi served on a bed of shiso leaves, accompanied by vegetables, wasabi, and seafood.",
+    "Type of meal": "Main Courses",
+    "Chef": "Bruno Bucciarati",
+    "Food critic review": 4.9,
+    "Price": 32.99,
+    "filename": "sashimi_imperial_del_mar.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50115"},
+        "name": "Fish",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50116"},
+        "name": "Salmon",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50117"},
+        "name": "Tuna",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50118"},
+        "name": "Scallop",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50119"},
+        "name": "Shrimp",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011a"},
+        "name": "Sea urchin",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011b"},
+        "name": "Cucumber",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011c"},
+        "name": "Wasabi",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011d"},
+        "name": "Shiso leaves",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011e"},
+        "name": "Daikon radish",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Sorbete de limón",
+    "Healing properties": "Remedy for sore throat inflammation.",
+    "Dish description": "Lemon sorbet with mint.",
+    "Type of meal": "Desserts / Breakfast",
+    "Chef": "Gio-Gio Gourmand",
+    "Food critic review": 3.7,
+    "Price": 4.5,
+    "filename": "sorbete_de_limon.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5011f"},
+        "name": "Lemon",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50120"},
+        "name": "Mint leaf",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50121"},
+        "name": "Ice",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Spaghetti alla Puttanesca",
+    "Healing properties": "Expels damaged teeth and causes new ones to grow.",
+    "Dish description": "Spaghetti served with olive oil, garlic, cherry tomatoes, pitted black olives, an anchovy fillet, chili pepper, parsley, and parmesan.",
+    "Type of meal": "Main Courses",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4.8,
+    "Price": 16.99,
+    "filename": "spaghetti_alla_puttanesca.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50122"},
+        "name": "Spaghetti",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50123"},
+        "name": "Olive oil",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50124"},
+        "name": "Garlic",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50125"},
+        "name": "Cherry tomatoes",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50126"},
+        "name": "Pitted black olives",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50127"},
+        "name": "Anchovy",
+        "Lactose intolerancy": false,
+        "Celiac": true,
+        "Organic": false
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50128"},
+        "name": "Chili pepper",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd50129"},
+        "name": "Parsley",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5012a"},
+        "name": "Parmesan",
+        "Lactose intolerancy": true,
+        "Celiac": false,
+        "Organic": false
+      }
+    ]
+  },
+  {
+    "name": "Té Verde",
+    "Healing properties": "Remedy for scoliosis.",
+    "Dish description": "A light, warm green tea, perfect for drinking during cooler weather.",
+    "Type of meal": "Drinks",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4,
+    "Price": 2.5,
+    "filename": "te_verde.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5012b"},
+        "name": "Water",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      },
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5012c"},
+        "name": "Camellia sinensis shoot",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      }
+    ]
+  },
+  {
+    "name": "Agua Mineral del Kilimanjaro",
+    "Healing properties": "It relieves insomnia and accumulated fatigue.",
+    "Dish description": "A glass made of tempered glass filled with exquisite, refreshing water.",
+    "Type of meal": "Drinks",
+    "Chef": "Tonio Trussardi",
+    "Food critic review": 4.5,
+    "Price": 2.99,
+    "filename": "agua_mineral_del_kilimanjaro.png",
+    "Ingriedents": [
+      {
+        "_id": {"$oid":"6af79c4aadfb412bddd5012d"},
+        "name": "Mineral Water",
+        "Lactose intolerancy": false,
+        "Celiac": false,
+        "Organic": true
+      }
+    ]
+  }
+]

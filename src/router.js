@@ -11,8 +11,20 @@ const upload = multer({ dest: board.UPLOADS_FOLDER })
 
 router.get('/', async (req, res) => {
 
-    
-    res.render('index');
+    res.render('index', { isHome: true, showNewDish: false });
+});
+
+router.get('/about', async (req, res) => {
+
+    res.render('about', { isAbout: true, showNewDish: true });
+});
+
+router.get('/reserve', async (req, res) => {
+    res.render('store', { isReserve: true, showNewDish: true });
+});
+
+router.get('/new-dish', async (req, res) => {
+    res.render('new_dish', { showNewDish: false });
 });
 
 router.post('/post/new', upload.single('image'), async (req, res) => {

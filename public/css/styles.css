@@ -12634,7 +12634,7 @@ fieldset:disabled .btn {
 }
 
 body {
-  background-image: linear-gradient(rgba(18, 10, 8, 0.72), rgba(18, 10, 8, 0.72)), url("../assets/img/backgroundtonios1.jpg");
+  background-image: linear-gradient(rgba(18, 10, 8, 0.72), rgba(18, 10, 8, 0.72)), url("../images/backgroundtonios1.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
