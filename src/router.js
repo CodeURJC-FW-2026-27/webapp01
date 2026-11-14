@@ -19,9 +19,15 @@ router.get('/', async (req, res) => {
         pagination
     });
 });
+//Searches and renders index with the filtered items, also divides the items by 6 items a page
+router.post('/index/buscar', async (req, res) => {
+    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
+    let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
 
-router.post('/index/search');
+    res.render('index', { dishes: resultados ,dishes, pagination});
+
+});
 
 router.get('/about', async (req, res) => {
     res.render('about', { isAbout: true, showNewDish: true });
@@ -33,7 +39,7 @@ router.get('/reserve', async (req, res) => {
 
 router.get('/show-dish', async (req, res) => {
     const dishid = req.query._id;
-    res.render('new_dish', { showNewDish: false , dishid: dishid});
+    res.render('new_dish', { showNewDish: false, dishid: dishid });
 });
 
 router.get('/new-dish', async (req, res) => {
