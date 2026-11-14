@@ -3,11 +3,12 @@ import multer from 'multer';
 import fs from 'node:fs/promises';
 
 import * as board from './board.js';
+import { UPLOADS_FOLDER_NAME } from './load_data.js';
 
 const router = express.Router();
 export default router;
 
-const upload = multer({ dest: board.UPLOADS_FOLDER })
+const upload = multer({ dest: board.UPLOADS_FOLDER_NAME })
 
 router.get('/', async (req, res) => {
     const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
@@ -25,6 +26,11 @@ router.get('/about', async (req, res) => {
 
 router.get('/reserve', async (req, res) => {
     res.render('store', { isReserve: true, showNewDish: true });
+});
+
+router.get('/show-dish', async (req, res) => {
+    const dishid = req.query._id;
+    res.render('new_dish', { showNewDish: false , dishid: dishid});
 });
 
 router.get('/new-dish', async (req, res) => {
@@ -58,7 +64,7 @@ router.get('/post/:id/delete', async (req, res) => {
     let post = await board.deletePost(req.params.id);
 
     if (post && post.imageFilename) {
-        await fs.rm(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+        await fs.rm(board.UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
     }
 
     res.render('deleted_post');
@@ -68,7 +74,8 @@ router.get('/post/:id/image', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
 
-    res.download(board.UPLOADS_FOLDER + '/' + post.imageFilename);
+    console.log(UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
+    res.download(UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
 
 });
 

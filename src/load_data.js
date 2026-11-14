@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import * as board from './board.js';
 
-const UPLOADS_FOLDER_NAME = './uploads';
+export const UPLOADS_FOLDER_NAME = './uploads';
 const DATA_FILE = new URL('../public/jsonfiles/dishesbbdd_mongodb.json', import.meta.url);
 const IMAGES_FOLDER = new URL('../public/images/example_dishes/', import.meta.url);
 const UPLOADS_FOLDER = new URL('../uploads/', import.meta.url);
