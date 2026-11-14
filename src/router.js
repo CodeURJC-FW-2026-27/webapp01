@@ -19,6 +19,9 @@ router.get('/', async (req, res) => {
     });
 });
 
+
+router.post('/index/search');
+
 router.get('/about', async (req, res) => {
     res.render('about', { isAbout: true, showNewDish: true });
 });
@@ -30,6 +33,10 @@ router.get('/reserve', async (req, res) => {
 router.get('/new-dish', async (req, res) => {
     res.render('new_dish', { showNewDish: false });
 });
+
+
+// ------------------------------------
+
 
 router.post('/post/new', upload.single('image'), async (req, res) => {
 

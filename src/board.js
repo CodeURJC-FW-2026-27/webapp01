@@ -9,6 +9,9 @@ const client = new MongoClient('mongodb://localhost:27017');
 const db = client.db('RISTORANTE');
 const posts = db.collection('DISHES');
 
+//Search bar's configuration
+await posts.createIndex({name:'text'});
+
 
 export async function addPost(post) {
     return await posts.insertOne(post);
