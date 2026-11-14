@@ -82,6 +82,17 @@ export async function getElementsByName(name) {
     return resultados;
 }
 
+export async function getElementsByCategory(category){
+    let resultados;
+    if(category){
+        resultados=await posts.find({
+            typeOfMeal:{$regex:category, $options:'i'}
+        }).toArray();
+    }
+    return resultados;
+
+}
+
 
 export async function getPost(id) {
 

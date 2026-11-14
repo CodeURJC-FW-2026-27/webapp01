@@ -19,13 +19,25 @@ router.get('/', async (req, res) => {
         pagination
     });
 });
-//Searches and renders index with the filtered items, also divides the items by 6 items a page
+// filters the item by its category (drinks, desserts....)
+router.get('/index', async(req,res)=>{
+    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+
+    let resultados= await board.getElementsByCategory(req.query.category);
+    res.render('index', {dishes: resultados});
+
+});
+
+//Searches and renders index with the filtered items
 router.post('/index/buscar', async (req, res) => {
-    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
     let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
 
-    res.render('index', { dishes: resultados ,dishes, pagination});
+    // res.render('index', { dishes: resultados ,dishes, pagination});
+    res.render('index',{
+        dishes:resultados
+    });
 
 });
 
