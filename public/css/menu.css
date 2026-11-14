@@ -112,6 +112,10 @@
   padding-bottom: 4rem;
 }
 
+.menu-paginated-list {
+  margin-top: 1.5rem;
+}
+
 .menu-category {
   padding: 2.6rem 0 1.2rem;
   scroll-margin-top: 1rem;
@@ -228,6 +232,50 @@
   font-size: 0.88rem;
   font-style: italic;
   text-align: center;
+}
+
+.menu-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.menu-pagination a,
+.menu-pagination span {
+  min-width: 2.5rem;
+  padding: 0.55rem 0.75rem;
+  color: var(--tonio-red);
+  text-align: center;
+  text-decoration: none;
+}
+
+.menu-pagination a:hover {
+  color: var(--tonio-brown);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.menu-pagination span[aria-current="page"] {
+  color: var(--tonio-ivory);
+  background: var(--tonio-red);
+  border-radius: 0.2rem;
+}
+
+.menu-pagination span[aria-disabled="true"] {
+  color: #8b7b72;
+}
+
+.menu-pagination-pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .menu-preview {

@@ -10,12 +10,16 @@ export default router;
 const upload = multer({ dest: board.UPLOADS_FOLDER })
 
 router.get('/', async (req, res) => {
+    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
-    res.render('index', { isHome: true, showNewDish: false });
+    res.render('index', {
+        isHome: true,
+        dishes,
+        pagination
+    });
 });
 
 router.get('/about', async (req, res) => {
-
     res.render('about', { isAbout: true, showNewDish: true });
 });
 
