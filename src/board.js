@@ -11,7 +11,6 @@ const posts = db.collection('DISHES');
 
 
 export async function addPost(post) {
-
     return await posts.insertOne(post);
 }
 
@@ -40,6 +39,7 @@ export async function getPostCount(){
     return await posts.countDocuments();
 }
 
+//TODO Ask
 export async function getPagePost(page = 1){
     
     return await posts.find().limit(6).skip((page-1)*6).toArray();
