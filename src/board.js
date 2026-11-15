@@ -47,10 +47,16 @@ export async function getPagePost(page = 1) {
     return await posts.find().limit(6).skip((page - 1) * 6).toArray();
 }
 
-/*
- * Aquí preparo la paginación del menú: obtengo los seis platos de la página
- * solicitada y creo los enlaces para ir a la página anterior, a otra página
- * o a la siguiente.
+
+/**
+ * Loads one page of dishes and builds the navigation data for the menu.
+ * The collection is split into pages of 6 dishes: the requested page is used
+ * to fetch its dishes, while the total document count determines how many
+ * page links to create. The result contains `previous` and `next` links only
+ * when those pages exist, plus every page link with a `current` flag. URLs
+ * return to the menu section and include the selected page in the query string.
+ * `requestedPage` should be a valid positive page number; a falsy value falls
+ * back to page 1.
  */
 export async function getPaginatedDishes(requestedPage = 1) {
     const page = requestedPage || 1;

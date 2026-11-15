@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import * as board from './board.js';
 
 export const UPLOADS_FOLDER_NAME = './uploads';
+
 const menuCategories = [
     ['drink', 'Drinks'],
     ['starters', 'Starters'],
@@ -38,6 +39,7 @@ export async function getDishes() {
     return dishes;
 }
 
+// This function checks if there are any dishes in the database. If not, it loads example dishes from a JSON file and copies their images to the uploads folder.
 export async function checkAndLoadExampleDishes(dishes) {
    
     if (!dishes || dishes.length === 0) {
@@ -50,18 +52,6 @@ export async function checkAndLoadExampleDishes(dishes) {
         await board.addManyPosts(dishesFromFile);
         console.log('No habia platos en la base de datos, se han cargado los platos de ejemplo desde el archivo JSON. En total se han cargado ' + dishesFromFile.length + ' platos.');
     } 
-    
-}
-
-export async function passImagesForCommits(dishes) {
-   
-        await fs.cp(IMAGES_FOLDER, UPLOADS_FOLDER, {
-            recursive: true,
-            force: false,
-            errorOnExist: false
-        });
-       
- 
     
 }
 
