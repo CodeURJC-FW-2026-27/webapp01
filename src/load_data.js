@@ -2,6 +2,14 @@ import fs from 'node:fs/promises';
 import * as board from './board.js';
 
 export const UPLOADS_FOLDER_NAME = 'uploads/';
+const DATA_FILE = new URL('../public/jsonfiles/dishesbbdd_mongodb.json', import.meta.url);
+const IMAGES_FOLDER = new URL('../public/images/example_dishes/', import.meta.url);
+const UPLOADS_FOLDER = new URL('../uploads/', import.meta.url);
+
+await fs.mkdir(UPLOADS_FOLDER, { recursive: true });
+
+const firstPageDishes = await board.getPagePost();
+await checkAndLoadExampleDishes(firstPageDishes);
 
 const menuCategories = [
     ['drink', 'Drinks'],
@@ -11,22 +19,14 @@ const menuCategories = [
     ['desserts-or-breakfast', 'Desserts / Breakfast']
 ];
 
+// Returns the menu categories and marks the active one to keep the current filter visible.
 export function getMenuCategories(activeCategory) {
     return menuCategories.map(([value, label]) => ({
         label,
         active: value === activeCategory,
-        url: value === activeCategory ? '/' : `/index?category=${encodeURIComponent(value)}//Why encodeUri?`
+        url: value === activeCategory ? '/' : `/index?category=${encodeURIComponent(value)}`
     }));
 }
-
-const DATA_FILE = new URL('../public/jsonfiles/dishesbbdd_mongodb.json', import.meta.url);
-const IMAGES_FOLDER = new URL('../public/images/example_dishes/', import.meta.url);
-const UPLOADS_FOLDER = new URL('../uploads/', import.meta.url);
-
-await fs.mkdir(UPLOADS_FOLDER, { recursive: true });
-
-const firstPageDishes = await board.getPagePost();
-await checkAndLoadExampleDishes(firstPageDishes);
 
 export async function getDishes() {
     const data = await fs.readFile(DATA_FILE, 'utf8');

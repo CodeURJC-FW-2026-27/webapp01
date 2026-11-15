@@ -49,28 +49,28 @@ export async function getPagePost(page = 1) {
 
 
 /**
- * Loads one page of dishes and builds the navigation data for the menu.
- * The collection is split into pages of 6 dishes: the requested page is used
- * to fetch its dishes, while the total document count determines how many
- * page links to create. The result contains `previous` and `next` links only
- * when those pages exist, plus every page link with a `current` flag. URLs
- * return to the menu section and include the selected page in the query string.
- * `requestedPage` should be a valid positive page number; a falsy value falls
- * back to page 1.
+ * Returns one page of up to six dishes and the matching navigation links.
+ * Without `filteredDishes`, it paginates the full collection; when a filtered
+ * list is provided, it slices that list instead. `pageUrl` builds links for
+ * the current view, so searches and categories can preserve their filter.
+ * `requestedPage` is the page number and defaults to page 1 when falsy.
  */
-export async function getPaginatedDishes(requestedPage = 1) {
+export async function getPaginatedDishes(requestedPage = 1, filteredDishes = null, pageUrl = page => `/?page=${page}#menu`) {
     const page = requestedPage || 1;
     const currentPage = Number(page);
-    const totalPages = Math.ceil((await getPostCount()) / 6);
-    const dishes = await getPagePost(page);
+    const totalDishes = Array.isArray(filteredDishes) ? filteredDishes.length : await getPostCount();
+    const totalPages = Math.ceil(totalDishes / 6);
+    const dishes = Array.isArray(filteredDishes)
+        ? filteredDishes.slice((currentPage - 1) * 6, currentPage * 6)
+        : await getPagePost(page);
     const pagination = {
-        previous: currentPage > 1 ? { url: `/?page=${currentPage - 1}#menu` } : null,
+        previous: currentPage > 1 ? { url: pageUrl(currentPage - 1) } : null,
         pages: Array.from({ length: totalPages }, (_, index) => ({
             number: index + 1,
-            url: `/?page=${index + 1}#menu`,
+            url: pageUrl(index + 1),
             current: index + 1 === currentPage
         })),
-        next: currentPage < totalPages ? { url: `/?page=${currentPage + 1}#menu` } : null
+        next: currentPage < totalPages ? { url: pageUrl(currentPage + 1) } : null
     };
 
     return { dishes, pagination };

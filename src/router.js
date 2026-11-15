@@ -11,7 +11,7 @@ export default router;
 const upload = multer({ dest: UPLOADS_FOLDER_NAME })
 
 
-//Creates a new object dish, makes the pertient tests and calls board.saveDish(newDsih)
+// Receives, validates, and saves a new dish, then displays the menu.
 router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
 
     const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
@@ -63,6 +63,7 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
 
 });
 
+// Displays the requested page of the full menu.
 router.get('/', async (req, res) => {
     const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
@@ -74,46 +75,78 @@ router.get('/', async (req, res) => {
     });
 });
 
-// filters the item by its category (drinks, desserts....)
-router.get('/index', async (req, res) => {
-    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
-    let resultados = await board.getElementsByCategory(req.query.category);
-    res.render('index', {
-        dishes: resultados,
-        categories: getMenuCategories(req.query.category)
-    });
+// Paginates a filtered list and prepares the menu navigation links.
+async function renderFilteredDishes(res, filteredDishes, requestedPage, pageUrl, activeCategory) {
+    const { dishes, pagination } = await board.getPaginatedDishes(requestedPage, filteredDishes, pageUrl);
 
+    res.render('index', {
+        dishes,
+        pagination,
+        categories: getMenuCategories(activeCategory)
+    });
+}
+
+// Finds dishes by name and preserves the search term in pagination links.
+async function renderSearchResults(res, searchTerm, requestedPage) {
+    const filteredDishes = await board.getElementsByName(searchTerm);
+    const pageUrl = page => `/index/buscar?fragmentoBusqueda=${encodeURIComponent(searchTerm)}&page=${page}#menu`;
+    await renderFilteredDishes(res, filteredDishes, requestedPage, pageUrl);
+}
+
+// Filters dishes by their category.
+router.get('/index', async (req, res) => {
+    const category = typeof req.query.category === 'string' ? req.query.category : '';
+    const filteredDishes = await board.getElementsByCategory(category);
+    const pageUrl = page => `/index?category=${encodeURIComponent(category)}&page=${page}#menu`;
+    await renderFilteredDishes(res, filteredDishes, req.query.page, pageUrl, category);
 });
 
 //Searches and renders index with the filtered items
 router.post('/index/buscar', async (req, res) => {
-    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+    // searchTerm is the submitted text used to find dishes by name.
+    const searchTerm = typeof req.body.fragmentoBusqueda === 'string'
+        ? req.body.fragmentoBusqueda
+        : '';
 
-    if (req.body.fragmentoBusqueda.trim() === '') {
+    if (searchTerm.trim() === '') {
+        const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
         res.render('index', {
-        isHome: true,
-        dishes,
-        pagination,
-        categories: getMenuCategories()
-    });
+            isHome: true,
+            dishes,
+            pagination,
+            categories: getMenuCategories()
+        });
     } else {
-        let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
+        await renderSearchResults(res, searchTerm, req.query.page);
+    }
+});
 
-        // res.render('index', { dishes: resultados ,dishes, pagination});
-        res.render('index', {
-            dishes: resultados,
+// Displays a results page using the search term stored in the URL.
+router.get('/index/buscar', async (req, res) => {
+    // searchTerm keeps the same search active when navigating between pages.
+    const searchTerm = typeof req.query.fragmentoBusqueda === 'string'
+        ? req.query.fragmentoBusqueda
+        : '';
+
+    if (searchTerm.trim() === '') {
+        const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+        return res.render('index', {
+            isHome: true,
+            dishes,
+            pagination,
             categories: getMenuCategories()
         });
     }
 
-
-
+    await renderSearchResults(res, searchTerm, req.query.page);
 });
 
+// Displays the restaurant information page.
 router.get('/about', async (req, res) => {
     res.render('about', { isAbout: true, showNewDish: true });
 });
 
+// Displays the reservation page.
 router.get('/reserve', async (req, res) => {
     res.render('store', { isReserve: true, showNewDish: true });
 });
@@ -135,6 +168,7 @@ router.get('/reserve', async (req, res) => {
  *   contains the dish, prepared ingredients, positive dietary labels, and a
  *   boolean that lets the template hide the label list when it is empty.
  */
+// Finds a dish by ID and displays its details and dietary information.
 router.get('/show_dish', async (req, res) => {
     const dishId = req.query.dishId;
     const dish = await board.getPost(dishId);
@@ -166,10 +200,12 @@ router.get('/show_dish', async (req, res) => {
     });
 });
 
+// Displays the form for creating a dish.
 router.get('/new_dish', async (req, res) => {
     res.render('new_dish', { showNewDish: false });
 });
 
+// Sends the image associated with the requested dish to the browser.
 router.get('/image/:id', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
@@ -181,6 +217,7 @@ router.get('/image/:id', async (req, res) => {
 
 // ------------------------------------
 
+// Creates a post from the submitted form and its optional image.
 router.post('/post/new', upload.single('image'), async (req, res) => {
 
     let post = {
@@ -196,6 +233,7 @@ router.post('/post/new', upload.single('image'), async (req, res) => {
 
 });
 
+// Finds a post by ID and displays its content.
 router.get('/post/:id', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
@@ -203,6 +241,7 @@ router.get('/post/:id', async (req, res) => {
     res.render('show_post', { post });
 });
 
+// Deletes a post and its associated image, if present.
 router.get('/post/:id/delete', async (req, res) => {
 
     let post = await board.deletePost(req.params.id);
