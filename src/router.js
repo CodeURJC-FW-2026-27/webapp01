@@ -214,8 +214,20 @@ router.get('/image/:id', async (req, res) => {
 
 });
 
+// Delete a dish by its ID and remove its image file if it exists.
+router.get('/delete_dish', async (req, res) => {
+    const dishId = req.query.dishId;
+    const dish = await board.deletePost(dishId);
 
-// ------------------------------------
+    if (dish && dish.imageFilename) {
+        await fs.rm(UPLOADS_FOLDER_NAME + '/' + dish.imageFilename);
+    }
+
+    res.render('deleted_post', { dishName: dish?.name });
+});
+
+
+// --------------NOT USING----------------------
 
 // Creates a post from the submitted form and its optional image.
 router.post('/post/new', upload.single('image'), async (req, res) => {

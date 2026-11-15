@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Dish deletion confirmation" />
+    <title>Dish Deleted - Diamond is Unbreakable</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/menu.css" rel="stylesheet" />
+</head>
+
+<body>
+    {{> headermenus}}
+
+    <section class="menu-hero-sample" aria-labelledby="confirmation-title">
+        <div class="container menu-hero-content">
+            <p class="menu-eyebrow">Fresh from Tonio's kitchen</p>
+            <h1 id="confirmation-title" class="mb-0">Deleted</h1>
+        </div>
+    </section>
+
+    <main class="menu-page">
+        <div class="container menu-content">
+            <section class="text-center py-5">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">The Dish</span>
+                    {{#dishName}}
+                    <span class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{dishName}}</strong></span>
+                    {{/dishName}}
+                    {{^dishName}}
+                    <span class="section-heading-lower text-decoration-soft-underline mt-2">Dish removed</span>
+                    {{/dishName}}
+                </h2>
+                {{#dishName}}
+                <p class="mb-5">This dish has been successfully removed from the menu.</p>
+                {{/dishName}}
+                {{^dishName}}
+                <p class="mb-5">The dish is no longer available on the menu.</p>
+                {{/dishName}}
+                <a class="btn btn-primary btn-lg" href="/">Return to the menu</a>
+            </section>
+        </div>
+    </main>
+
+    {{>footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>

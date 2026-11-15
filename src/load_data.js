@@ -12,14 +12,19 @@ const firstPageDishes = await board.getPagePost();
 await checkAndLoadExampleDishes(firstPageDishes);
 
 const menuCategories = [
-    ['drink', 'Drinks'],
-    ['starters', 'Starters'],
-    ['main courses', 'Main Courses'],
-    ['side dishes', 'Side Dishes'],
-    ['desserts-or-breakfast', 'Desserts / Breakfast']
+    ['Drinks', 'Drinks'],
+    ['Starters', 'Starters'],
+    ['Main Courses', 'Main Courses'],
+    ['Side Dishes', 'Side Dishes'],
+    ['Desserts', 'Desserts / Breakfast']
 ];
 
-// Returns the menu categories and marks the active one to keep the current filter visible.
+/* Each pair contains the database typeOfMeal value and the label shown in the menu.
+Returns objects for the HTML template; url filters by category, or returns to the full menu when active.
+Example: getMenuCategories('Desserts') includes [
+  { label: 'Drinks', active: true, url: '/' },
+  { label: 'Starters', active: false, url: '/index?category=starters' }, ...] 
+*/
 export function getMenuCategories(activeCategory) {
     return menuCategories.map(([value, label]) => ({
         label,
@@ -28,6 +33,7 @@ export function getMenuCategories(activeCategory) {
     }));
 }
 
+// This function reads the dishes from the JSON file and returns them as an array of objects.
 export async function getDishes() {
     const data = await fs.readFile(DATA_FILE, 'utf8');
     const dishes = JSON.parse(data);
