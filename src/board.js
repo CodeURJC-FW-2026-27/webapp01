@@ -10,7 +10,7 @@ const db = client.db('RISTORANTE');
 const posts = db.collection('DISHES');
 
 //Search bar's configuration
-await posts.createIndex({name:'text'});
+await posts.createIndex({ name: 'text' });
 
 
 export async function addPost(post) {
@@ -18,39 +18,33 @@ export async function addPost(post) {
 }
 
 export async function addManyPosts(postsArray) {
-    
+
     return await posts.insertMany(postsArray);
 }
 
-export async function deletePost(id){
+export async function deletePost(id) {
 
     return await posts.findOneAndDelete({ _id: new ObjectId(id) });
 }
 
-export async function deletePosts(){
+export async function deletePosts() {
 
     return await posts.deleteMany();
 }
 
-export async function getPosts(){
+export async function getPosts() {
 
     return await posts.find().toArray();
 }
 
-export async function getPostCount(){
+export async function getPostCount() {
 
     return await posts.countDocuments();
 }
 
+export async function getPagePost(page = 1) {
 
-export async function getPost(id){
-
-    return await posts.findOne({ _id: new ObjectId(id) });
-}
-
-export async function getPagePost(page = 1){
-    
-    return await posts.find().limit(6).skip((page-1)*6).toArray();
+    return await posts.find().limit(6).skip((page - 1) * 6).toArray();
 }
 
 /*
@@ -76,4 +70,30 @@ export async function getPaginatedDishes(requestedPage = 1) {
     return { dishes, pagination };
 }
 
+export async function getElementsByName(name) {
+    let resultados;
+    if (name) {
+        // resultados = await posts.find({ $text: { $search: name } }).toArray();
+        resultados= await posts.find({
+            name:{$regex:name, $options:'i'}//i makes the function do not care about capital letters
+        }).toArray(); //Maybe a kind of sort?
+    }
+    return resultados;
+}
+
+export async function getElementsByCategory(category){
+    let resultados;
+    if(category){
+        resultados=await posts.find({
+            typeOfMeal:{$regex:category, $options:'i'}
+        }).toArray();
+    }
+    return resultados;
+
+}
+
+export async function getPost(id) {
+
+    return await posts.findOne({ _id: new ObjectId(id) });
+}
 

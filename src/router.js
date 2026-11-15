@@ -19,9 +19,27 @@ router.get('/', async (req, res) => {
         pagination
     });
 });
+// filters the item by its category (drinks, desserts....)
+router.get('/index', async(req,res)=>{
+    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
+    let resultados= await board.getElementsByCategory(req.query.category);
+    res.render('index', {dishes: resultados});
 
-//router.post('/index/search');
+});
+
+//Searches and renders index with the filtered items
+router.post('/index/buscar', async (req, res) => {
+    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+
+    let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
+
+    // res.render('index', { dishes: resultados ,dishes, pagination});
+    res.render('index',{
+        dishes:resultados
+    });
+
+});
 
 router.get('/about', async (req, res) => {
     res.render('about', { isAbout: true, showNewDish: true });
