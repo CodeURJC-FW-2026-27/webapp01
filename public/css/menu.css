@@ -92,18 +92,33 @@
 }
 
 .menu-jump a {
+  padding: 0.55rem 0.75rem;
   color: var(--tonio-red);
   font-family: "Raleway", sans-serif;
   font-size: 0.8rem;
   font-weight: 800;
+  border: 1px solid transparent;
+  border-radius: 0.2rem;
   text-decoration: none;
   text-transform: uppercase;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.menu-jump a.is-active {
+  color: var(--tonio-brown);
+  background-color: var(--tonio-ivory);
+  border-color: var(--tonio-gold);
 }
 
 .menu-jump a:hover {
   color: var(--tonio-brown);
-  text-decoration: underline;
-  text-underline-offset: 0.25rem;
+  background-color: var(--tonio-ivory);
+  border-color: var(--tonio-gold);
+}
+
+.menu-jump a:focus-visible {
+  outline: 2px solid var(--tonio-red);
+  outline-offset: 2px;
 }
 
 .menu-content {

@@ -57,11 +57,9 @@
 
     <!-- Mini menu for id addressing -->
     <nav class="container menu-jump" aria-label="Menu categories">
-      <a href="/index?category=drink">Drinks</a>
-      <a href="/index?category=starters">Starters</a>
-      <a href="/index?category=main courses">Main Courses</a>
-      <a href="/index?category=side dishes">Side Dishes</a>
-      <a href="/index?category=desserts-or-breakfast">Desserts / Breakfast</a>
+      {{#categories}}
+      <a href="{{url}}" class="{{#active}}is-active{{/active}}" {{#active}}aria-current="true"{{/active}}>{{label}}</a>
+      {{/categories}}
 
       <!-- input search modification in order to be able to filter by dishName-->
       <form class="d-flex" role="search" method="post" action="/index/buscar">
@@ -75,16 +73,16 @@
 
       <div class="d-flex">
         <div class="d-inline-flex btn btn-primary ms-auto">
-          <a class="nav-link text-uppercase" href="pages/new_dish.html">
+          <a class="nav-link text-uppercase" href="/new_dish">
             NEW DISH
           </a>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 menu-list menu-paginated-list">
          {{#dishes}}
-        <a href="show-dish?dishId={{_id}}" class="dish-link">
+        <a href="/show_dish?dishId={{_id}}" class="dish-link">
             <article class="menu-dish">
-              <img src="/post/{{_id}}/image" alt="{{imageFilename}}" />
+              <img src="/image/{{_id}}" alt="{{imageFilename}}" />
               <div class="menu-dish-details">
                 <div class="menu-dish-heading">
                   <h3>{{name}}</h3><span>€{{price}}</span>

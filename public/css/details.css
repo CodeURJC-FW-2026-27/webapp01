@@ -1,63 +1,109 @@
-.precio {
+.dish-price {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem !important;
   color: var(--tonio-red);
 }
 
-
-.desc {
-  font-size:1.25rem;
+.detail-copy {
+  font-size: 1.25rem;
 }
 
-.chef {
-  font-size:1.5rem;
-  color:var(--tonio-red);
+.healing-properties-title,
+.chef-section-title {
+  color: var(--tonio-red-dark);
 }
 
-.imagen-pequeña {
+.healing-properties-text {
+  color: #60493d;
+}
+
+.ingredient-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.ingredient-list > li::before {
+  content: "-";
+  flex-shrink: 0;
+  color: var(--tonio-gold);
+  font-weight: 700;
+}
+
+.rating-stars {
   width: 60px;
   height: auto;
 }
 
-.retrato {
-  border: white solid 1px;
-  width:25rem;
-  height:auto;
-}
-
-.alergenos {
- background: var(--tonio-red);
- color:white;
- display: flex;
- flex-direction:row;
- justify-content: space-around;
- margin-top:12rem !important;
- font-weight:bold;
- border-radius: 0.5rem;
-}
-
-
-.critic-review {
+.dietary-labels {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0.75rem 0 0;
+  border-radius: 0.5rem;
+  background: var(--tonio-red);
+  color: #fff;
+  font-weight: 700;
+  list-style: none;
+}
+
+.critic-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  height: 2rem;
+  margin: 0;
+  border-radius: 8px;
+  background-color: var(--tonio-gold);
+  color: var(--tonio-red-dark);
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.12rem;
-  color: var(--tonio-red-dark);
-  background-color: var(--tonio-gold);
-  justify-content: center;
-  align-items: bottom;
   text-align: center;
-  height: 2rem;
-  width: 12rem;
-  border-radius: 8px;
-  margin:0;
 }
 
+.critic-rating p {
+  margin-bottom: 0;
+}
 
-.info {
-  font-size:1rem;
+.ingredient-label {
   color: var(--tonio-red-dark);
-  font-weight:lighter;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.dietary-options {
+  border: 1px solid var(--tonio-gold-soft);
+  border-left: 4px solid var(--tonio-gold);
+  border-radius: 6px;
+  padding: 1rem 1.25rem 0.5rem;
+  background-color: var(--tonio-ivory);
+}
+
+.dietary-options-title {
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 0 0.4rem;
+  color: var(--tonio-red-dark);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.dietary-options-hint {
+  margin: 0.1rem 0 0.75rem;
+  color: var(--tonio-brown);
+  font-size: 0.9rem;
+}
+
+.dietary-option {
+  min-height: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dietary-option .form-check-label {
+  cursor: pointer;
 }
 
 .btn-tertiary {
@@ -76,10 +122,10 @@
   box-shadow:none !important;
 }
 
-.btn-dish {
-    --bs-btn-color: #f9f9f9;
-  --bs-btn-bg: #3f1e09;
-  --bs-btn-border-color: #45220d;
+.dish-action {
+  --bs-btn-color: #f9f9f9;
+  --bs-btn-bg: var(--tonio-brown);
+  --bs-btn-border-color: var(--tonio-brown);
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #28140d;
   --bs-btn-hover-border-color: #26120c;
@@ -87,68 +133,50 @@
   --bs-btn-active-bg: #26120c;
   --bs-btn-active-border-color: #23110b;
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #2F170F;
-  --bs-btn-disabled-border-color: #2F170F;
+  --bs-btn-disabled-bg: var(--tonio-brown);
+  --bs-btn-disabled-border-color: var(--tonio-brown);
 }
 
 
-.product-item .product-item-img {
+.product-item .dish-image {
   max-width: min(100%, 900px);
 }
 
 @media (min-width: 768px) {
-  .precio {
+  .dish-price {
     font-size: 3.5rem !important;
   }
 }
 
-@media (max-width:400px ){
-
-  .alergenos li {
-    font-size:0.8rem;
-  }
-}
-
-
-
-@media (max-width: 450px) {
-
-  .precio {
-    font-weight:bold;
-  }
-
-  .critic-review {
-  display: flex;
-  justify-content: center;
-  align-items: bottom;
-
-   width: 120px;
-
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.12rem;
-  color: var(--tonio-red-dark);
-  background-color: var(--tonio-gold);
-  text-align: center;
-
-  border-radius: 8px;
-  margin:0;
-}
-
-.review {
-  border:black solid 0.75px;
-  border-radius:15px;
-  width:9rem;
-  height:6rem;
-  align-items:center;
-  justify-content:center;
-}
 @media (max-width: 767.98px) {
-  .boton-return-page {
+  .back-home-link {
     display: block;
     width: 100%;
   }
 }
 
+@media (max-width: 450px) {
+  .dish-price {
+    font-weight: 700;
+  }
 
+  .critic-rating {
+    width: 120px;
+    font-size: 0.85rem;
+  }
+
+  .rating-summary {
+    width: 9rem;
+    height: 6rem;
+    align-items: center;
+    justify-content: center;
+    border: 0.75px solid var(--tonio-ink);
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dietary-labels li {
+    font-size: 0.8rem;
+  }
 }
