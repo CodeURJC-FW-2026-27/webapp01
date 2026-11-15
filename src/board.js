@@ -77,29 +77,37 @@ export async function getPaginatedDishes(requestedPage = 1) {
 }
 
 export async function getElementsByName(name) {
-    let resultados;
+    let result;
     if (name) {
         // resultados = await posts.find({ $text: { $search: name } }).toArray();
-        resultados= await posts.find({
+        result= await posts.find({
             name:{$regex:name, $options:'i'}//i makes the function do not care about capital letters
         }).toArray(); //Maybe a kind of sort?
     }
-    return resultados;
+    return result;
 }
 
 export async function getElementsByCategory(category){
-    let resultados;
+    let results;
     if(category){
-        resultados=await posts.find({
+        results=await posts.find({
             typeOfMeal:{$regex:category, $options:'i'}
         }).toArray();
     }
-    return resultados;
+    return results;
 
 }
 
 export async function getPost(id) {
 
     return await posts.findOne({ _id: new ObjectId(id) });
+}
+
+export async function saveDish(dish){
+    if(dish){
+        let result= await posts.insertOne(dish)
+        return result.acknowledged; //This returns the state of the query, true if was successfully, false otherwise
+    }
+    return false;
 }
 

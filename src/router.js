@@ -10,6 +10,59 @@ export default router;
 
 const upload = multer({ dest: UPLOADS_FOLDER_NAME })
 
+
+//Creates a new object dish, makes the pertient tests and calls board.saveDish(newDsih)
+router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
+
+    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+
+    let dish = {
+        name: req.body.newdishName,
+        healingProperties: req.body.newdishHealingProperties,
+        dishDescription: req.body.newdishDescription,
+        typeOfMeal: req.body.newdishTypeofmeal,
+        chef: req.body.newdishChef,
+        foodCriticReview: req.body.newdishReview,
+        price: req.body.newdishPrice,
+        imageFilename: req.file.filename
+    }
+    console.log(dish);
+    let numberPrice = Number(dish.price);
+
+    if (!dish.name || dish.name.trim() === '') {
+        return res.status(400).send('Name cant be empty!');
+    }
+
+    if (!dish.dishDescription || dish.dishDescription.trim() === '') {
+        return res.status(400).send('Description cant be empty!');
+    }
+
+    if (!Number.isFinite(numberPrice) || numberPrice <= 0) {
+        return res.status(400).send('Price must be grater than 0');
+    }
+
+    if (!dish.typeOfMeal) {
+        return res.status(400).send('You must choose a type of meal');
+    }
+
+    try {
+        let result = await board.saveDish(dish);
+        console.log(result);
+
+        res.render('index', {
+            isHome: true,
+            dishes,
+            pagination,
+            categories: getMenuCategories()
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Error al guardar el plato');
+    }
+
+});
+
 router.get('/', async (req, res) => {
     const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
@@ -20,11 +73,11 @@ router.get('/', async (req, res) => {
         categories: getMenuCategories()
     });
 });
-// filters the item by its category (drinks, desserts....)
-router.get('/index', async(req,res)=>{
-    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
-    let resultados= await board.getElementsByCategory(req.query.category);
+// filters the item by its category (drinks, desserts....)
+router.get('/index', async (req, res) => {
+    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+    let resultados = await board.getElementsByCategory(req.query.category);
     res.render('index', {
         dishes: resultados,
         categories: getMenuCategories(req.query.category)
@@ -34,15 +87,26 @@ router.get('/index', async(req,res)=>{
 
 //Searches and renders index with the filtered items
 router.post('/index/buscar', async (req, res) => {
-    // const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
 
-    let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
-
-    // res.render('index', { dishes: resultados ,dishes, pagination});
-    res.render('index',{
-        dishes:resultados,
+    if (req.body.fragmentoBusqueda.trim() === '') {
+        res.render('index', {
+        isHome: true,
+        dishes,
+        pagination,
         categories: getMenuCategories()
     });
+    } else {
+        let resultados = await board.getElementsByName(req.body.fragmentoBusqueda);
+
+        // res.render('index', { dishes: resultados ,dishes, pagination});
+        res.render('index', {
+            dishes: resultados,
+            categories: getMenuCategories()
+        });
+    }
+
+
 
 });
 

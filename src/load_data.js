@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import * as board from './board.js';
 
-export const UPLOADS_FOLDER_NAME = './uploads';
+export const UPLOADS_FOLDER_NAME = 'uploads/';
 
 const menuCategories = [
     ['drink', 'Drinks'],
@@ -15,7 +15,7 @@ export function getMenuCategories(activeCategory) {
     return menuCategories.map(([value, label]) => ({
         label,
         active: value === activeCategory,
-        url: value === activeCategory ? '/' : `/index?category=${encodeURIComponent(value)}`
+        url: value === activeCategory ? '/' : `/index?category=${encodeURIComponent(value)}//Why encodeUri?`
     }));
 }
 
