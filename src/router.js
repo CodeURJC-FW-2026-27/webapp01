@@ -8,7 +8,7 @@ import { UPLOADS_FOLDER_NAME } from './load_data.js';
 const router = express.Router();
 export default router;
 
-const upload = multer({ dest: board.UPLOADS_FOLDER_NAME })
+const upload = multer({ dest: UPLOADS_FOLDER_NAME })
 
 router.get('/', async (req, res) => {
     const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/index/search');
+//router.post('/index/search');
 
 router.get('/about', async (req, res) => {
     res.render('about', { isAbout: true, showNewDish: true });
@@ -32,8 +32,26 @@ router.get('/reserve', async (req, res) => {
 });
 
 router.get('/show-dish', async (req, res) => {
-    const dishid = req.query._id;
-    res.render('new_dish', { showNewDish: false , dishid: dishid});
+    const dishId = req.query.dishId;
+    const dish = await board.getPost(dishId);
+
+    const ingredients = Array.isArray(dish?.ingredients)
+        ? dish.ingredients.map(ingredient => {
+            const dietaryLabels = [
+                ingredient.lactoseIntolerancy === true && 'Lactose intolerance',
+                ingredient.celiac === true && 'Celiac',
+                ingredient.organic === true && 'Organic',
+                ingredient.vegan === true && 'Vegan'
+            ].filter(Boolean).join(', ');
+
+            return { ...ingredient, dietaryLabels };
+        })
+        : [];
+
+    res.render('dish_detail', {
+        showNewDish: false,
+        dish: { ...dish, ingredients }
+    });
 });
 
 router.get('/new-dish', async (req, res) => {
@@ -81,7 +99,6 @@ router.get('/post/:id/image', async (req, res) => {
 
     let post = await board.getPost(req.params.id);
 
-    console.log(UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
     res.download(UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
 
 });

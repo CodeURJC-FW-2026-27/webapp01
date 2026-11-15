@@ -42,7 +42,12 @@ export async function getPostCount(){
     return await posts.countDocuments();
 }
 
-//TODO Ask
+
+export async function getPost(id){
+
+    return await posts.findOne({ _id: new ObjectId(id) });
+}
+
 export async function getPagePost(page = 1){
     
     return await posts.find().limit(6).skip((page-1)*6).toArray();
@@ -71,8 +76,4 @@ export async function getPaginatedDishes(requestedPage = 1) {
     return { dishes, pagination };
 }
 
-export async function getPost(id){
-
-    return await posts.findOne({ _id: new ObjectId(id) });
-}
 
