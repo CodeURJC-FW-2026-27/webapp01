@@ -182,7 +182,7 @@ router.get('/show_dish', async (req, res) => {
             ingredient.vegan === true && 'Vegan'
         ].filter(Boolean).join(', ');
 
-        return { ...ingredient, dietaryLabels };
+        return { ...ingredient, dishId, dietaryLabels };
     });
     const dietaryProperties = [
         ['lactoseIntolerancy', 'Lactose intolerance'],
@@ -223,9 +223,186 @@ router.get('/delete_dish', async (req, res) => {
         await fs.rm(UPLOADS_FOLDER_NAME + '/' + dish.imageFilename);
     }
 
-    res.render('deleted_post', { dishName: dish?.name });
+    res.render('confirmation', { dishName: dish?.name, showNewDish: false });
 });
 
+
+
+
+router.post('/dish/:id/ingredient', async (req, res) => {
+    const dishId = req.params.id;
+    const ingredientName = req.body.name ? req.body.name.trim() : '';
+
+    if (!ingredientName) {
+        return res.status(400).send('El nombre del ingrediente no puede estar vacío');
+    }
+
+    const dish = await board.getPost(dishId);
+    if (!dish) {
+        return res.status(404).send('Plato no encontrado');
+    }
+
+    const dishIngredients = Array.isArray(dish.ingredients) ? dish.ingredients : [];
+    const ingredientExists = dishIngredients.some(ingredient => ingredient.name.toLowerCase() === ingredientName.toLowerCase());
+
+    if (ingredientExists) {
+        return res.status(400).send('El ingrediente ya existe en el plato');
+    }
+
+    const newIngredient = {
+        name: req.body.name,
+        lactoseIntolerancy: req.body.lactoseIntolerancy === 'true',
+        celiac: req.body.celiac === 'true',
+        organic: req.body.organic === 'true',
+        vegan: req.body.vegan === 'true'
+    };
+
+    const success = await board.addIngredientDish(dishId, newIngredient);
+
+    if (success) {
+        res.render('confirmation', {
+            dishId,
+            ingredientName: newIngredient.name,
+            borrado: false,
+            EditIng: false
+        });
+    } else {
+        res.status(400).send('Error adding ingredient to dish');
+    }
+});
+
+
+
+router.get('/dish/:id/ingredient/delete', async (req, res) => {
+    const dishId = req.params.id;
+    const ingredientName = req.query.name;
+
+    const success = await board.deleteIngredientDish(dishId, ingredientName);
+
+    if (success) {
+        res.render('confirmation', {
+            dishId,
+            ingredientName,
+            borrado: true,
+            EditIng: false
+        });
+    } else {
+        res.status(400).send('Error deleting ingredient from dish');
+    }
+});
+
+// Loads the selected ingredient into the edit form.
+router.get('/dish/:id/ingredient/edit', async (req, res) => {
+    const dishId = req.params.id;
+    const ingredientName = req.query.name;
+    const dish = await board.getPost(dishId);
+
+    if (!dish) { // In case someone modifies the URL and the dish doesn't exist, we return a 404 error.
+        return res.status(404).send('Plato no encontrado');
+    }
+
+    const ingredient = dish.ingredients?.find(ingredient => ingredient.name === ingredientName);
+    if (!ingredient) {
+        return res.status(404).send('Ingrediente no encontrado');
+    }
+
+    res.render('edit_ingredients', {
+        dishId,
+        ingredient
+    });
+});
+
+// Saves the edited ingredient and displays its confirmation page.
+router.post('/dish/:id/ingredient/edit', async (req, res) => {
+    const dishId = req.params.id;
+    const oldName = req.body.oldName;
+    const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
+
+    if (!oldName || !name) {
+        return res.status(400).send('El nombre del ingrediente no puede estar vacío');
+    }
+
+    const updatedIngredient = {
+        name,
+        lactoseIntolerancy: req.body.lactoseIntolerancy === 'true',
+        celiac: req.body.celiac === 'true',
+        organic: req.body.organic === 'true',
+        vegan: req.body.vegan === 'true'
+    };
+
+    const success = await board.updateIngredientDish(dishId, oldName, updatedIngredient);
+    if (!success) {
+        return res.status(404).send('No se encontró el ingrediente para actualizar');
+    }
+    
+    res.render('confirmation', {
+        dishId,
+        ingredientName: name,
+        EditIng: true
+    });
+});
+
+// Loads the dish into the form for editing.
+
+router.get('/edit_dish', async (req, res) => {
+    const dishId = req.query.dishId;
+    const dish = await board.getPost(dishId);
+
+    if (!dish) {
+        return res.status(404).send('Plato no encontrado.');
+    }
+
+    res.render('new_dish', {
+        dish,
+        isEdit: true,
+        showNewDish: false,
+        isBreakfast: dish.typeOfMeal === 'desert/breakfast',
+        isDrinks: dish.typeOfMeal === 'drinks',
+        isMainCourse: dish.typeOfMeal === 'main courses',
+        isSideDish: dish.typeOfMeal === 'side dishes',
+        isTonio: dish.chef === 'Tonio',
+        isJoestar: dish.chef === 'Joestar_Giovanna',
+        isBruno: dish.chef === 'Bruno_Bucciarati',
+        isGioGio: dish.chef === 'Gio-Gio_Gourmand',
+        isBrando: dish.chef === "Brando_d'Abruzzo",
+        isCiocolata: dish.chef === 'Ciocolata_Sorbett'
+    });
+});
+
+
+// Saves the edited dish and displays its confirmation page.
+
+router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) => {
+    const dishId = req.params.id;
+    const currentDish = await board.getPost(dishId);
+
+    if (!currentDish) {
+        return res.status(400).send('El plato no existe.');
+    }
+
+    const updatedDish = {
+        name: req.body.newdishName,
+        healingProperties: req.body.newdishHealingProperties,
+        dishDescription: req.body.newdishDescription,
+        typeOfMeal: req.body.newdishTypeofmeal,
+        chef: req.body.newdishChef,
+        foodCriticReview: req.body.newdishReview,
+        price: req.body.newdishPrice,
+        imageFilename: req.file ? req.file.filename : currentDish.imageFilename
+    };
+
+    const success = await board.updateDish(dishId, updatedDish);
+
+    if (!success) {
+        return res.status(400).send('Error al actualizar el plato.');
+    }
+
+    res.render('confirmation', {
+        dishId,
+        dishName: updatedDish.name,
+        EditDish: true
+    });
+});
 
 // --------------NOT USING----------------------
 
@@ -262,7 +439,7 @@ router.get('/post/:id/delete', async (req, res) => {
         await fs.rm(board.UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
     }
 
-    res.render('deleted_post');
+    res.render('confirmation');
 });
 
 

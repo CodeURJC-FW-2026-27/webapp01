@@ -111,3 +111,57 @@ export async function saveDish(dish){
     return false;
 }
 
+
+
+export async function addIngredientDish(dishId, ingredient) {
+    if (dishId && ingredient) {
+        const result = await posts.updateOne(
+            { _id: new ObjectId(dishId) },
+            { $push: { ingredients: ingredient } }
+        );
+        return result.modifiedCount > 0; // Returns true if the dish was updated, false otherwise
+    }
+    return false; // If there's no dishID or ingredient, returns false
+}
+
+
+export async function deleteIngredientDish(dishId, ingredientName) {
+    if (dishId && ingredientName) {
+        const result = await posts.updateOne(
+            {_id: new ObjectId(dishId) },
+            { $pull: { ingredients: { name: ingredientName } } }
+        );
+        return result.modifiedCount > 0; // Returns true if the dish was updated, false otherwise
+    }
+    return false; // If there's no dishID or ingredient, returns false
+}
+
+export async function updateIngredientDish(dishId, oldName, ingredient) {
+    if (!dishId || !oldName || !ingredient?.name) {  // We check if the dishId, oldName, and ingredient are provided if not return false
+        return false;  
+    }
+
+    const result = await posts.updateOne(
+        { _id: new ObjectId(dishId), 'ingredients.name': oldName },
+        { $set: { 'ingredients.$': ingredient } }
+    );
+
+    return result.matchedCount > 0;
+}
+
+export async function updateDish(dishId, updatedDish) {
+    if ((!dishId || !updatedDish)) { // We check if the dishId and the dish to update are provided, if not return false
+        return false;
+    }
+
+    const result = await posts.updateOne(
+        {_id: new ObjectId(dishId)},
+        {$set: updatedDish}
+    )
+
+    return result.matchedCount > 0;
+
+}
+
+
+
