@@ -45,7 +45,8 @@
                 <div class="bg-faded p-4 py-4 d-flex ms-auto rounded d-flex flex-column text-center">
                     <h2 class="section-heading mb-0">
                         <span class="section-heading-upper">A delicacy from Tonio's kitchen</span>
-                        <span class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{dish.name}}</strong></span>
+                        <span
+                            class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{dish.name}}</strong></span>
                     </h2>
                     <div class="align-items-center">
                         <img class="dish-image mx-auto d-flex rounded img-fluid mb-3 mb-lg-0 mt-5"
@@ -82,20 +83,21 @@
                 <h3 class="menu-description">Ingredients</h3>
                 <a class="btn btn-tertiary" href="#newIngredientForm">Add</a>
             </div>
-           
+
             <ul class="ingredient-list d-flex flex-column gap-3 detail-copy">
-                {{#dish.ingredients}} 
+                {{#dish.ingredients}}
                 <li class="d-flex flex-column flex-md-row align-items-md-center gap-2">
-                    {{name}}  
+                    {{name}}
                     {{#dietaryLabels}}
                     <span class="ingredient-label">({{dietaryLabels}})</span>
                     {{/dietaryLabels}}
                     <div class="d-flex gap-2 ms-md-auto align-items-center">
-                        <button class="btn btn-sm btn-tertiary">Edit</button>
-                        <button class="btn btn-sm btn-tertiary">Delete</button>
+                        <a href="/dish/{{dishId}}/ingredient/edit?name={{name}}" class="btn btn-sm btn-tertiary">Edit</a>
+                        <a href="/dish/{{dishId}}/ingredient/delete?name={{name}}" class="btn btn-sm btn-tertiary">Delete</a>
+
                     </div>
                 </li>
-                {{/dish.ingredients}} 
+                {{/dish.ingredients}}
             </ul>
 
             <h3 class="menu-description chef-section-title">Chef</h3>
@@ -120,11 +122,13 @@
                             <h2 class="section-heading mb-4">
                                 <span class="section-heading-lower text-decoration-soft-underline">New Ingredient</span>
                             </h2>
-                            <form class="ingredient-form">
+
+                            <form class="ingredient-form" action="/dish/{{dish._id}}/ingredient" method="POST">
 
                                 <label for="newIngredient_name" class="form-label text-start d-block">Enter Ingredient
                                     Name</label>
-                                <input type="text" class="form-control mb-3" id="newdishName" placeholder="Example: Tomato, Onion, Garlic..." name="newdishName" required>
+                                <input type="text" class="form-control mb-3" id="newIngredient_name"
+                                    placeholder="Example: Tomato, Onion, Garlic..." name="name" required>
 
                                 <fieldset class="dietary-options text-start mb-4">
                                     <legend class="dietary-options-title">Dietary properties</legend>
@@ -133,7 +137,8 @@
                                     <div class="form-check dietary-option">
                                         <input type="checkbox" class="form-check-input" id="newIngredient_lactose"
                                             name="lactoseIntolerancy" value="true">
-                                        <label for="newIngredient_lactose" class="form-check-label">Lactose intolerance</label>
+                                        <label for="newIngredient_lactose" class="form-check-label">Lactose
+                                            intolerance</label>
                                     </div>
 
                                     <div class="form-check dietary-option">
@@ -165,6 +170,7 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>

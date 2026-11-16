@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Dish deletion confirmation" />
-    <title>Dish Deleted - Diamond is Unbreakable</title>
+    <meta name="description" content="Dish and ingredient action confirmation" />
+    <title>Action Confirmation - Diamond is Unbreakable</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
@@ -19,7 +19,7 @@
     <section class="menu-hero-sample" aria-labelledby="confirmation-title">
         <div class="container menu-hero-content">
             <p class="menu-eyebrow">Fresh from Tonio's kitchen</p>
-            <h1 id="confirmation-title" class="mb-0">Deleted</h1>
+            <h1 id="confirmation-title" class="mb-0">{{#EditDish}}Success{{/EditDish}}{{^EditDish}}{{#ingredientName}}Success{{/ingredientName}}{{^ingredientName}}Deleted{{/ingredientName}}{{/EditDish}}</h1>
         </div>
     </section>
 
@@ -27,6 +27,14 @@
         <div class="container menu-content">
             <section class="text-center py-5">
                 <h2 class="section-heading mb-4">
+                    {{#EditDish}}
+                    <span class="section-heading-upper">Edited dish</span>
+                    <span class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{dishName}}</strong></span>
+                    {{/EditDish}}
+                    {{^EditDish}}{{#ingredientName}}
+                    <span class="section-heading-upper">{{#EditIng}}Edited{{/EditIng}}{{^EditIng}}{{#borrado}}Deleted{{/borrado}}{{^borrado}}Added{{/borrado}}{{/EditIng}} ingredient</span>
+                    <span class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{ingredientName}}</strong></span>
+                    {{/ingredientName}}{{^ingredientName}}
                     <span class="section-heading-upper">The Dish</span>
                     {{#dishName}}
                     <span class="section-heading-lower text-decoration-soft-underline mt-2"><strong>{{dishName}}</strong></span>
@@ -34,7 +42,16 @@
                     {{^dishName}}
                     <span class="section-heading-lower text-decoration-soft-underline mt-2">Dish removed</span>
                     {{/dishName}}
+                    {{/ingredientName}}{{/EditDish}}
                 </h2>
+                {{#EditDish}}
+                <p class="mb-5">The dish has been successfully updated.</p>
+                <a class="btn btn-primary btn-lg" href="/show_dish?dishId={{dishId}}">Return to the dish</a>
+                {{/EditDish}}
+                {{^EditDish}}{{#ingredientName}}
+                <p class="mb-5">The ingredient has been successfully {{#EditIng}}edited.{{/EditIng}}{{^EditIng}}{{#borrado}}removed{{/borrado}}{{^borrado}}added{{/borrado}} to the dish.{{/EditIng}}</p>
+                <a class="btn btn-primary btn-lg" href="/show_dish?dishId={{dishId}}">Return to the dish</a>
+                {{/ingredientName}}{{^ingredientName}}
                 {{#dishName}}
                 <p class="mb-5">This dish has been successfully removed from the menu.</p>
                 {{/dishName}}
@@ -42,6 +59,7 @@
                 <p class="mb-5">The dish is no longer available on the menu.</p>
                 {{/dishName}}
                 <a class="btn btn-primary btn-lg" href="/">Return to the menu</a>
+                {{/ingredientName}}{{/EditDish}}
             </section>
         </div>
     </main>

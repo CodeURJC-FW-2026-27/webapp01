@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Edit ingredient from Tonio's kitchen" />
+    <title>Diamond is Unbreakable - Edit Ingredient</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/new_dish.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+</head>
+
+<body>
+    {{> headermenus}}
+
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner bg-white text-center rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Refine the recipe</span>
+                            <span class="section-heading-lower text-decoration-soft-underline">Edit Ingredient</span>
+                        </h2>
+
+                        <!-- Formulario apuntando a la ruta de edición con POST -->
+                        <form class="ingredient-form" action="/dish/{{dishId}}/ingredient/edit" method="POST">
+                            
+                            <!-- Input oculto para recordar el nombre original del ingrediente -->
+                            <input type="hidden" name="oldName" value="{{ingredient.name}}">
+
+                            <label for="ingredientName" class="form-label text-start d-block">Enter Ingredient Name</label>
+                            <input type="text" class="form-control mb-3" id="ingredientName" name="name" value="{{ingredient.name}}" required>
+
+                            <fieldset class="dietary-options text-start mb-4">
+                                <legend class="dietary-options-title">Dietary properties</legend>
+                                <p class="dietary-options-hint">Select all that apply to this ingredient.</p>
+
+                                <div class="form-check dietary-option">
+                                    <!-- Usamos {{#ingredient.lactoseIntolerancy}}checked{{/ingredient.lactoseIntolerancy}} para marcarlo si ya era true -->
+                                    <input type="checkbox" class="form-check-input" id="edit_lactose" name="lactoseIntolerancy" value="true" {{#ingredient.lactoseIntolerancy}}checked{{/ingredient.lactoseIntolerancy}}>
+                                    <label for="edit_lactose" class="form-check-label">Lactose intolerance</label>
+                                </div>
+
+                                <div class="form-check dietary-option">
+                                    <input type="checkbox" class="form-check-input" id="edit_celiac" name="celiac" value="true" {{#ingredient.celiac}}checked{{/ingredient.celiac}}>
+                                    <label for="edit_celiac" class="form-check-label">Celiac</label>
+                                </div>
+
+                                <div class="form-check dietary-option">
+                                    <input type="checkbox" class="form-check-input" id="edit_organic" name="organic" value="true" {{#ingredient.organic}}checked{{/ingredient.organic}}>
+                                    <label for="edit_organic" class="form-check-label">Organic</label>
+                                </div>
+
+                                <div class="form-check dietary-option">
+                                    <input type="checkbox" class="form-check-input" id="edit_vegan" name="vegan" value="true" {{#ingredient.vegan}}checked{{/ingredient.vegan}}>
+                                    <label for="edit_vegan" class="form-check-label">Vegan</label>
+                                </div>
+                            </fieldset>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <button class="btn btn-primary btn-lg w-100" type="submit">Save Changes</button>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="/show_dish?dishId={{dishId}}" class="btn btn-secondary btn-lg w-100 d-flex align-items-center justify-content-center text-decoration-none">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección decorativa inferior (la misma de Chibi Tonio) -->
+    <section class="page-section">
+        <div class="container">
+            <div class="about-heading-content">
+                <div class="bg-faded rounded p-4">
+                    <div class="row">
+                        <div class="col-lg-6 mx-auto mt-5 imagen_newdish">
+                            <img class="img-fluid rounded mb-3 mb-lg-0 w-75" src="/images/chibitonio.png" alt="..." />
+                        </div>
+                        <div class="col-lg-6 mx-auto mt-5 d-flex">
+                            <div class="col-lg-10 ps-lg-0 text-start mt-4">
+                                <h2 class="section-heading mb-5">
+                                    <span class="section-heading-upper">A VERY SPECIAL KITCHEN</span>
+                                </h2>
+                                <h4>
+                                    <span class="section-heading-lower">At Tonio’s, every single ingredient matters. Adjust the details to keep the balance of flavors and healing properties intact.</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{>footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>
