@@ -251,6 +251,7 @@ I implemented the functionality of the Dish Detail page, including the ability t
 - [Adding logic for the detail page.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/02becc664bd365646c1b7f4ca8c8d20c524d30c1)
 - [Adding all the detail page functionality.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/54e07ae9bdbe32318e7a7f5f23d0cc3132852914)
 - [Error page.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/819d8c0f1fa67d1e1683ca0f344d4692102a9857)
+- [Editing image preview + some fixes](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/df2a1f552404e7ec9d68190f7f40968f06498576)
 
 
 **Files I've contributed to:**
@@ -263,4 +264,6 @@ I implemented the functionality of the Dish Detail page, including the ability t
 - `new_dish.html`
 - `data.json.txt`
 - `error.html`
+- `scripts.js`
+- `new_dish.css`
 - `README.md`
