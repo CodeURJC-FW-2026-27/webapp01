@@ -244,7 +244,7 @@ I implemented the functionality of the Dish Detail page, including the ability t
 **Files I've contributed to:**
 
 - `board.js`
-- `router.js
+- `router.js`
 - `confirmation.html`
 - `dish_detail.html`
 - `edit_ingredients.html`
