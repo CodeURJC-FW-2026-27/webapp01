@@ -9,6 +9,8 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: UPLOADS_FOLDER_NAME })
+const isValidPrice = value =>
+    typeof value === 'string' && /^\d+(?:\.\d{1,2})?$/.test(value) && Number.isFinite(Number(value));
 
 
 // Receives, validates, and saves a new dish, then displays the menu.
@@ -22,7 +24,7 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
     const description = typeof req.body.newdishDescription === 'string'
         ? req.body.newdishDescription.trim()
         : '';
-    const numberPrice = Number(req.body.newdishPrice);
+    const numberPrice = isValidPrice(req.body.newdishPrice) ? Number(req.body.newdishPrice) : NaN;
 
     if (!name) {
         return errorPage(400, 'The dish name cannot be empty.');
@@ -30,8 +32,8 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
     if (!description) {
         return errorPage(400, 'The dish description cannot be empty.');
     }
-    if (!Number.isFinite(numberPrice) || numberPrice <= 0) {
-        return errorPage(400, 'The price must be a number greater than zero.');
+    if (!Number.isFinite(numberPrice) || numberPrice < 0 || numberPrice > 1000) {
+        return errorPage(400, 'The price must be between 0 and 1000, with at most two decimal places.');
     }
     if (!req.body.newdishTypeofmeal) {
         return errorPage(400, 'You must choose a type of meal.');
@@ -62,7 +64,7 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
             typeOfMeal: req.body.newdishTypeofmeal,
             chef: req.body.newdishChef,
             foodCriticReview: req.body.newdishReview,
-            price: req.body.newdishPrice,
+            price: numberPrice,
             imageFilename: req.file.filename
         };
         const saved = await board.saveDish(dish);
@@ -441,8 +443,20 @@ router.get('/edit_dish', async (req, res) => {
 
 router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) => {
     const dishId = req.params.id;
+    const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
+    const numberPrice = isValidPrice(req.body.newdishPrice) ? Number(req.body.newdishPrice) : NaN;
+    if (!Number.isFinite(numberPrice) || numberPrice < 0 || numberPrice > 1000) {
+        return res.status(400).render('error', {
+            dishId,
+            errorMessage: 'The price must be between 0 and 1000, with at most two decimal places.'
+        });
+    }
     const allDishes = await board.getPosts();
-    const dishExists = allDishes.some(dish => dish.name.toLowerCase() === name.toLowerCase());
+    const dishExists = allDishes.some(dish =>
+        dish._id.toString() !== dishId &&
+        typeof dish.name === 'string' &&
+        dish.name.trim().toLowerCase() === name.toLowerCase()
+    );
     let currentDish;
     try {
         currentDish = await board.getPost(dishId);
@@ -462,13 +476,13 @@ router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) =>
     }
 
     const updatedDish = {
-        name: req.body.newdishName,
+        name,
         healingProperties: req.body.newdishHealingProperties,
         dishDescription: req.body.newdishDescription,
         typeOfMeal: req.body.newdishTypeofmeal,
         chef: req.body.newdishChef,
         foodCriticReview: req.body.newdishReview,
-        price: req.body.newdishPrice,
+        price: numberPrice,
         imageFilename: req.file ? req.file.filename : currentDish.imageFilename
     };
 

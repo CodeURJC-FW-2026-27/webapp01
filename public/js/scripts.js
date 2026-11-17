@@ -9,4 +9,24 @@ window.addEventListener('DOMContentLoaded', event => {
     if (listHoursArray.length > 0) {
         listHoursArray[new Date().getDay()].classList.add(('today'));
     }
+
+    document.querySelectorAll('.dish-form').forEach(form => {
+        const reviewInput = form.querySelector('#newdishReview');
+        const priceInput = form.querySelector('#newdishPrice');
+        if (!reviewInput || !priceInput) {
+            return;
+        }
+
+        form.addEventListener('submit', event => {
+            reviewInput.step = 'any';
+            priceInput.step = 'any';
+            const isValid = form.reportValidity();
+            reviewInput.step = '0.5';
+            priceInput.step = '1';
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    });
 });

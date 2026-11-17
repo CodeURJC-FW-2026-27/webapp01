@@ -44,7 +44,7 @@
                             <span class="section-heading-lower text-decoration-soft-underline">Edit your masterpiece</span>
                             {{/isEdit}}
                         </h2>
-                        <form class="dish-form" method="post" action="{{#isEdit}}/dish/{{dish._id}}/edit{{/isEdit}}{{^isEdit}}/new_dish{{/isEdit}}" enctype="multipart/form-data">
+                        <form class="dish-form" method="post" action="{{#isEdit}}/dish/{{dish._id}}/edit{{/isEdit}}{{^isEdit}}/new_dish{{/isEdit}}" enctype="multipart/form-data" novalidate>
                             <label for="newdishName" class="form-label text-start d-block">Enter Dish Name</label>
                             <input type="text" class="form-control mb-3" name="newdishName" id="newdishName" value="{{dish.name}}" required placeholder="Be creative!">
                             <!-- Healing properties!, Dish description!, Type of meal!, Chef!, Food critic review!, Price ....-->
@@ -80,9 +80,8 @@
                                 class="form-control mb-3" value="{{dish.foodCriticReview}}">
 
                             <label for="newdishPrice" class="form-label text-start d-block">Dish Price</label>
-                            <input type="number" class="form-control mb-3" name="newdishPrice" step="0,5"
-                                id="newdishPrice" min="0" onkeydown="event.preventDefault()" value="{{dish.price}}">
-
+                            <input type="number" class="form-control mb-3" name="newdishPrice" step="1"
+                                id="newdishPrice" min="0" max="1000" value="{{dish.price}}" required>
 
                             <label for="newdishDescription" class="form-label text-start d-block">Enter Dish
                                 Description</label>
