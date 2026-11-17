@@ -10,6 +10,35 @@ window.addEventListener('DOMContentLoaded', event => {
         listHoursArray[new Date().getDay()].classList.add(('today'));
     }
 
+    const imageInput = document.getElementById('newDishImage');
+    const imagePreview = document.getElementById('dishImagePreview');
+    if (imageInput && imagePreview) {
+        const originalImageSrc = imagePreview.src;
+        let previewUrl = null;
+
+        imageInput.addEventListener('change', () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = null;
+            }
+
+            const file = imageInput.files[0];
+            if (!file) {
+                imagePreview.src = originalImageSrc;
+                return;
+            }
+
+            previewUrl = URL.createObjectURL(file);
+            imagePreview.src = previewUrl;
+        });
+
+        window.addEventListener('pagehide', () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        });
+    }
+
     document.querySelectorAll('.dish-form').forEach(form => {
         const reviewInput = form.querySelector('#newdishReview');
         const priceInput = form.querySelector('#newdishPrice');

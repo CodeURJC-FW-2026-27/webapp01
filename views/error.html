@@ -30,14 +30,26 @@
                     <span class="section-heading-upper">The operation could not be completed</span>
                 </h2>
                 <p class="mb-5">{{errorMessage}}</p>
-                {{#returnUrl}}
-                <a class="btn btn-primary btn-lg" href="{{returnUrl}}">{{returnLabel}}</a>
-                {{/returnUrl}}
-                {{^returnUrl}}{{#dishId}}
-                <a class="btn btn-primary btn-lg" href="/show_dish?dishId={{dishId}}">Return to the dish</a>
-                {{/dishId}}{{^dishId}}
-                <a class="btn btn-primary btn-lg" href="/">Return to the menu</a>
-                {{/dishId}}{{/returnUrl}}
+                {{#returnFormUrl}}
+                <form action="{{returnFormUrl}}" method="post">
+                    {{#returnFormFields}}
+                    <input type="hidden" name="{{name}}" value="{{value}}">
+                    {{/returnFormFields}}
+                    <button class="btn btn-primary btn-lg" type="submit" name="confirmed" value="no">
+                        Return to the form
+                    </button>
+                </form>
+                {{/returnFormUrl}}
+                {{^returnFormUrl}}
+                    {{#returnUrl}}
+                    <a class="btn btn-primary btn-lg" href="{{returnUrl}}">{{returnLabel}}</a>
+                    {{/returnUrl}}
+                    {{^returnUrl}}{{#dishId}}
+                    <a class="btn btn-primary btn-lg" href="/show_dish?dishId={{dishId}}">Return to the dish</a>
+                    {{/dishId}}{{^dishId}}
+                    <a class="btn btn-primary btn-lg" href="/">Return to the menu</a>
+                    {{/dishId}}{{/returnUrl}}
+                {{/returnFormUrl}}
             </section>
         </div>
     </main>

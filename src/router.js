@@ -25,6 +25,22 @@ function renderConfirmation(res, { title, message, confirmUrl, fields = [] }) {
     });
 }
 
+function getDishFormFields(body) {
+    return [
+        'newdishName',
+        'newdishHealingProperties',
+        'newdishTypeofmeal',
+        'newdishChef',
+        'newdishReview',
+        'newdishPrice',
+        'newdishDescription'
+    ].map(name => ({
+        name,
+        value: typeof body[name] === 'string' ? body[name] : ''
+    }));
+}
+
+
 async function removePendingUpload(filename) {
     if (typeof filename === 'string' && filename && path.basename(filename) === filename) {
         await fs.rm(path.join(PENDING_UPLOADS_FOLDER_NAME, filename), { force: true });
@@ -39,8 +55,8 @@ router.post('/new_dish', editUpload.single('newdishImage'), async (req, res) => 
         await removePendingUpload(stagedImage);
         return res.status(status).render('error', {
             errorMessage,
-            returnUrl: '/new_dish',
-            returnLabel: 'Return to create dish'
+            returnFormUrl: '/new_dish',
+            returnFormFields: getDishFormFields(req.body)
         });
     };
     const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
@@ -62,16 +78,16 @@ router.post('/new_dish', editUpload.single('newdishImage'), async (req, res) => 
                 price: req.body.newdishPrice
             },
             hasFormValues: true,
-            isBreakfast: req.body.newdishTypeofmeal === 'desert/breakfast',
-            isDrinks: req.body.newdishTypeofmeal === 'drinks',
-            isMainCourse: req.body.newdishTypeofmeal === 'main courses',
-            isSideDish: req.body.newdishTypeofmeal === 'side dishes',
-            isTonio: req.body.newdishChef === 'Tonio',
-            isJoestar: req.body.newdishChef === 'Joestar_Giovanna',
-            isBruno: req.body.newdishChef === 'Bruno_Bucciarati',
-            isGioGio: req.body.newdishChef === 'Gio-Gio_Gourmand',
-            isBrando: req.body.newdishChef === "Brando_d'Abruzzo",
-            isCiocolata: req.body.newdishChef === 'Ciocolata_Sorbett'
+            isBreakfast: req.body.newdishTypeofmeal === 'Desserts',
+            isDrinks: req.body.newdishTypeofmeal === 'Drinks',
+            isMainCourse: req.body.newdishTypeofmeal === 'Main Courses',
+            isSideDish: req.body.newdishTypeofmeal === 'Side Dishes',
+            isTonio: req.body.newdishChef === 'Tonio Trussardi',
+            isJoestar: req.body.newdishChef === 'Joestar Giovanna',
+            isBruno: req.body.newdishChef === 'Bruno Bucciarati',
+            isGioGio: req.body.newdishChef === 'Gio-Gio Gourmand',
+            isBrando: req.body.newdishChef === "Brando d'Abruzzo",
+            isCiocolata: req.body.newdishChef === 'Ciocolata Sorbett'
         });
     }
 
@@ -307,11 +323,14 @@ router.get('/new_dish', async (req, res) => {
 
 // Sends the image associated with the requested dish to the browser.
 router.get('/image/:id', async (req, res) => {
+    const post = await board.getPost(req.params.id);
+    if (!post?.imageFilename) {
+        return res.sendStatus(404);
+    }
 
-    let post = await board.getPost(req.params.id);
-
-    res.download(UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
-
+    return res.sendFile(post.imageFilename, {
+        root: path.resolve(UPLOADS_FOLDER_NAME)
+    });
 });
 
 // Shows a confirmation prompt before deleting the dish.
@@ -633,28 +652,33 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
             dish: formDish,
             isEdit: true,
             showNewDish: false,
-            isBreakfast: formDish.typeOfMeal === 'desert/breakfast',
-            isDrinks: formDish.typeOfMeal === 'drinks',
-            isMainCourse: formDish.typeOfMeal === 'main courses',
-            isSideDish: formDish.typeOfMeal === 'side dishes',
-            isTonio: formDish.chef === 'Tonio',
-            isJoestar: formDish.chef === 'Joestar_Giovanna',
-            isBruno: formDish.chef === 'Bruno_Bucciarati',
-            isGioGio: formDish.chef === 'Gio-Gio_Gourmand',
-            isBrando: formDish.chef === "Brando_d'Abruzzo",
-            isCiocolata: formDish.chef === 'Ciocolata_Sorbett'
+            isBreakfast: formDish.typeOfMeal === 'Desserts',
+            isDrinks: formDish.typeOfMeal === 'Drinks',
+            isMainCourse: formDish.typeOfMeal === 'Main Courses',
+            isSideDish: formDish.typeOfMeal === 'Side Dishes',
+            isTonio: formDish.chef === 'Tonio Trussardi',
+            isJoestar: formDish.chef === 'Joestar Giovanna',
+            isBruno: formDish.chef === 'Bruno Bucciarati',
+            isGioGio: formDish.chef === 'Gio-Gio Gourmand',
+            isBrando: formDish.chef === "Brando d'Abruzzo",
+            isCiocolata: formDish.chef === 'Ciocolata Sorbett'
         });
     }
 
     if (!name) {
         await removePendingUpload(stagedImage);
-        return res.status(400).render('error', { errorMessage: 'The dish name cannot be empty.' });
+        return res.status(400).render('error', {
+            errorMessage: 'The dish name cannot be empty.',
+            returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            returnFormFields: getDishFormFields(req.body)
+        });
     }
     if (!Number.isFinite(numberPrice) || numberPrice < 0 || numberPrice > 1000) {
         await removePendingUpload(stagedImage);
         return res.status(400).render('error', {
-            dishId,
-            errorMessage: 'The price must be between 0 and 1000, with at most two decimal places.'
+            errorMessage: 'The price must be between 0 and 1000, with at most two decimal places.',
+            returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            returnFormFields: getDishFormFields(req.body)
         });
     }
     let currentDish;
@@ -682,7 +706,11 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
 
     if (dishExists) {
         await removePendingUpload(stagedImage);
-        return res.status(400).render('error', { errorMessage: ' A dish with this name already exists.' });
+        return res.status(400).render('error', {
+            errorMessage: 'A dish with this name already exists.',
+            returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            returnFormFields: getDishFormFields(req.body)
+        });
     }
 
     const updatedDish = {
@@ -716,7 +744,11 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
 
     if (stagedImage) {
         if (path.basename(stagedImage) !== stagedImage) {
-            return res.status(400).render('error', { dishId, errorMessage: 'The uploaded image is invalid.' });
+            return res.status(400).render('error', {
+                errorMessage: 'The uploaded image is invalid.',
+                returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+                returnFormFields: getDishFormFields(req.body)
+            });
         }
         try {
             await fs.access(path.join(PENDING_UPLOADS_FOLDER_NAME, stagedImage));
@@ -726,7 +758,11 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
             );
         } catch (error) {
             console.error(error);
-            return res.status(400).render('error', { dishId, errorMessage: 'The uploaded image is no longer available. Please try again.' });
+            return res.status(400).render('error', {
+                errorMessage: 'The uploaded image is no longer available. Please try again.',
+                returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+                returnFormFields: getDishFormFields(req.body)
+            });
         }
     }
 
@@ -739,8 +775,9 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
             await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
         }
         return res.status(500).render('error', {
-            dishId,
-            errorMessage: 'A database error occurred while updating the dish.'
+            errorMessage: 'A database error occurred while updating the dish.',
+            returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            returnFormFields: getDishFormFields(req.body)
         });
     }
 
@@ -748,7 +785,11 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
         if (stagedImage) {
             await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
         }
-        return res.status(400).render('error', { dishId, errorMessage: 'The dish could not be updated.' });
+        return res.status(400).render('error', {
+            errorMessage: 'The dish could not be updated.',
+            returnFormUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            returnFormFields: getDishFormFields(req.body)
+        });
     }
 
     if (stagedImage && currentDish.imageFilename && currentDish.imageFilename !== stagedImage) {
