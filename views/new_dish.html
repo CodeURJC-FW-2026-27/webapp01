@@ -56,7 +56,7 @@
 
                             <label for="newdishTypeofmeal" class="form-label text-start d-block">Type of Meal</label>
                             <select aria-required="true" name="newdishTypeofmeal" id="newdishTypeofmeal" required class="form-select mb-3">
-                                <option value="" {{^isEdit}}disabled selected{{/isEdit}}>--Selecciona--</option>
+                                <option value="" {{^isEdit}}{{^hasFormValues}}disabled selected{{/hasFormValues}}{{/isEdit}}>--Selecciona--</option>
                                 <option value="desert/breakfast" {{#isBreakfast}}selected{{/isBreakfast}}>Breakfast/Dessert</option>
                                 <option value="drinks" {{#isDrinks}}selected{{/isDrinks}}>Drinks</option>
                                 <option value="main courses" {{#isMainCourse}}selected{{/isMainCourse}}>Main courses</option>
@@ -65,7 +65,7 @@
 
                             <label for="newdishChef" class="form-label text-start d-block">Chef</label>
                             <select name="newdishChef" id="newdishChef" required class="form-select mb-3">
-                                <option value="" {{^isEdit}}disabled selected{{/isEdit}}>--Selecciona--</option>
+                                <option value="" {{^isEdit}}{{^hasFormValues}}disabled selected{{/hasFormValues}}{{/isEdit}}>--Selecciona--</option>
                                 <option value="Tonio" {{#isTonio}}selected{{/isTonio}}>Tonio Trussardi</option>
                                 <option value="Joestar_Giovanna" {{#isJoestar}}selected{{/isJoestar}}>Joestar Giovanna</option>
                                 <option value="Bruno_Bucciarati" {{#isBruno}}selected{{/isBruno}}>Bruno Bucciarati</option>

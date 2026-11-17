@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 import * as board from './board.js';
 import { getMenuCategories, UPLOADS_FOLDER_NAME } from './load_data.js';
@@ -9,22 +10,70 @@ const router = express.Router();
 export default router;
 
 const upload = multer({ dest: UPLOADS_FOLDER_NAME })
+const PENDING_UPLOADS_FOLDER_NAME = path.join(UPLOADS_FOLDER_NAME, '.pending');
+await fs.mkdir(PENDING_UPLOADS_FOLDER_NAME, { recursive: true });
+const editUpload = multer({ dest: PENDING_UPLOADS_FOLDER_NAME });
 const isValidPrice = value =>
     typeof value === 'string' && /^\d+(?:\.\d{1,2})?$/.test(value) && Number.isFinite(Number(value));
 
-
-// Receives, validates, and saves a new dish, then displays the menu.
-router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
-    const errorPage = (status, errorMessage) => res.status(status).render('error', {
-        errorMessage,
-        returnUrl: '/new_dish',
-        returnLabel: 'Return to create dish'
+function renderConfirmation(res, { title, message, confirmUrl, fields = [] }) {
+    return res.render('confirmation', {
+        confirmationTitle: title,
+        confirmationMessage: message,
+        confirmUrl,
+        hiddenFields: fields.map(([name, value]) => ({ name, value }))
     });
+}
+
+async function removePendingUpload(filename) {
+    if (typeof filename === 'string' && filename && path.basename(filename) === filename) {
+        await fs.rm(path.join(PENDING_UPLOADS_FOLDER_NAME, filename), { force: true });
+    }
+}
+
+
+// Validates a new dish and asks for confirmation before saving it.
+router.post('/new_dish', editUpload.single('newdishImage'), async (req, res) => {
+    const stagedImage = req.file?.filename || (typeof req.body.stagedImage === 'string' ? req.body.stagedImage : '');
+    const errorPage = async (status, errorMessage) => {
+        await removePendingUpload(stagedImage);
+        return res.status(status).render('error', {
+            errorMessage,
+            returnUrl: '/new_dish',
+            returnLabel: 'Return to create dish'
+        });
+    };
     const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
     const description = typeof req.body.newdishDescription === 'string'
         ? req.body.newdishDescription.trim()
         : '';
     const numberPrice = isValidPrice(req.body.newdishPrice) ? Number(req.body.newdishPrice) : NaN;
+
+    if (req.body.confirmed === 'no') {
+        await removePendingUpload(stagedImage);
+        return res.render('new_dish', {
+            dish: {
+                name: req.body.newdishName,
+                healingProperties: req.body.newdishHealingProperties,
+                dishDescription: req.body.newdishDescription,
+                typeOfMeal: req.body.newdishTypeofmeal,
+                chef: req.body.newdishChef,
+                foodCriticReview: req.body.newdishReview,
+                price: req.body.newdishPrice
+            },
+            hasFormValues: true,
+            isBreakfast: req.body.newdishTypeofmeal === 'desert/breakfast',
+            isDrinks: req.body.newdishTypeofmeal === 'drinks',
+            isMainCourse: req.body.newdishTypeofmeal === 'main courses',
+            isSideDish: req.body.newdishTypeofmeal === 'side dishes',
+            isTonio: req.body.newdishChef === 'Tonio',
+            isJoestar: req.body.newdishChef === 'Joestar_Giovanna',
+            isBruno: req.body.newdishChef === 'Bruno_Bucciarati',
+            isGioGio: req.body.newdishChef === 'Gio-Gio_Gourmand',
+            isBrando: req.body.newdishChef === "Brando_d'Abruzzo",
+            isCiocolata: req.body.newdishChef === 'Ciocolata_Sorbett'
+        });
+    }
 
     if (!name) {
         return errorPage(400, 'The dish name cannot be empty.');
@@ -44,9 +93,10 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
     if (name[0] !== name[0].toUpperCase()) {
         return errorPage(400, 'The first letter of the dish name must be uppercase.');
     }
-    if (!req.file) {
+    if (!stagedImage) {
         return errorPage(400, 'Please upload an image for the dish.');
     }
+    let promotedImage = false;
     try {
 
         const allDishes = await board.getPosts();
@@ -65,22 +115,50 @@ router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
             chef: req.body.newdishChef,
             foodCriticReview: req.body.newdishReview,
             price: numberPrice,
-            imageFilename: req.file.filename
+            imageFilename: stagedImage
         };
+
+        if (req.body.confirmed !== 'yes' || req.file) {
+            return renderConfirmation(res, {
+                title: `Add ${name} to the menu?`,
+                message: 'Save this new dish to the menu?',
+                confirmUrl: '/new_dish',
+                fields: [
+                    ['newdishName', name],
+                    ['newdishHealingProperties', req.body.newdishHealingProperties || ''],
+                    ['newdishDescription', description],
+                    ['newdishTypeofmeal', req.body.newdishTypeofmeal],
+                    ['newdishChef', req.body.newdishChef],
+                    ['newdishReview', req.body.newdishReview || ''],
+                    ['newdishPrice', String(numberPrice)],
+                    ['stagedImage', stagedImage]
+                ]
+            });
+        }
+
+        if (path.basename(stagedImage) !== stagedImage) {
+            return errorPage(400, 'The uploaded image is invalid.');
+        }
+        await fs.access(path.join(PENDING_UPLOADS_FOLDER_NAME, stagedImage));
+        await fs.rename(
+            path.join(PENDING_UPLOADS_FOLDER_NAME, stagedImage),
+            path.join(UPLOADS_FOLDER_NAME, stagedImage)
+        );
+        promotedImage = true;
+
         const saved = await board.saveDish(dish);
         if (!saved) {
+            await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
             return errorPage(500, 'The dish could not be saved.');
         }
 
-        const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
-        return res.render('index', {
-            isHome: true,
-            dishes,
-            pagination,
-            categories: getMenuCategories()
-        });
+        return res.redirect(303, '/');
     } catch (error) {
         console.error(error);
+        await removePendingUpload(stagedImage);
+        if (promotedImage) {
+            await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
+        }
         return errorPage(500, 'Error al guardar el plato.');
     }
 });
@@ -236,22 +314,47 @@ router.get('/image/:id', async (req, res) => {
 
 });
 
-// Delete a dish by its ID and remove its image file if it exists.
+// Shows a confirmation prompt before deleting the dish.
 router.get('/delete_dish', async (req, res) => {
     const dishId = req.query.dishId;
     try {
-        const dish = await board.deletePost(dishId);
+        const dish = await board.getPost(dishId);
         if (!dish) {
             return res.status(404).render('error', {
-                errorMessage: 'The dish could not be found or deleted.'
+                errorMessage: 'The dish could not be found.'
             });
         }
 
+        return renderConfirmation(res, {
+            title: `Delete ${dish.name}?`,
+            message: 'This will permanently remove the dish from the menu.',
+            confirmUrl: `/delete_dish?dishId=${encodeURIComponent(dishId)}`
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', { errorMessage: 'A database error occurred while loading the dish.' });
+    }
+});
+
+// Deletes the dish only after the user confirms.
+router.post('/delete_dish', async (req, res) => {
+    const dishId = req.query.dishId;
+    if (req.body.confirmed === 'no') {
+        return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
+    }
+    if (req.body.confirmed !== 'yes') {
+        return res.status(400).render('error', { errorMessage: 'Choose whether to continue with the operation.' });
+    }
+
+    try {
+        const dish = await board.deletePost(dishId);
+        if (!dish) {
+            return res.status(404).render('error', { errorMessage: 'The dish could not be found or deleted.' });
+        }
         if (dish.imageFilename) {
             await fs.rm(UPLOADS_FOLDER_NAME + '/' + dish.imageFilename, { force: true });
         }
-
-        return res.render('confirmation', { dishName: dish.name, showNewDish: false });
+        return res.redirect(303, '/');
     } catch (error) {
         console.error(error);
         return res.status(500).render('error', {
@@ -265,7 +368,10 @@ router.get('/delete_dish', async (req, res) => {
 
 router.post('/dish/:id/ingredient', async (req, res) => {
     const dishId = req.params.id;
-    const ingredientName = req.body.name ? req.body.name.trim() : '';
+    if (req.body.confirmed === 'no') {
+        return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
+    }
+    const ingredientName = typeof req.body.name === 'string' ? req.body.name.trim() : '';
 
     if (!ingredientName) {
         return res.status(400).render('error', { dishId, errorMessage: 'The ingredient name cannot be empty.' });
@@ -284,32 +390,75 @@ router.post('/dish/:id/ingredient', async (req, res) => {
     }
 
     const newIngredient = {
-        name: req.body.name,
+        name: ingredientName,
         lactoseIntolerancy: req.body.lactoseIntolerancy === 'true',
         celiac: req.body.celiac === 'true',
         organic: req.body.organic === 'true',
         vegan: req.body.vegan === 'true'
     };
 
+    if (req.body.confirmed !== 'yes') {
+        return renderConfirmation(res, {
+            title: `Add ${ingredientName}?`,
+            message: 'Add this ingredient to the dish?',
+            confirmUrl: `/dish/${encodeURIComponent(dishId)}/ingredient`,
+            fields: [
+                ['name', newIngredient.name],
+                ['lactoseIntolerancy', String(newIngredient.lactoseIntolerancy)],
+                ['celiac', String(newIngredient.celiac)],
+                ['organic', String(newIngredient.organic)],
+                ['vegan', String(newIngredient.vegan)]
+            ]
+        });
+    }
+
     const success = await board.addIngredientDish(dishId, newIngredient);
 
     if (success) {
-        res.render('confirmation', {
-            dishId,
-            ingredientName: newIngredient.name,
-            borrado: false,
-            EditIng: false
-        });
+        return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
     } else {
-        res.status(400).render('error', { dishId, errorMessage: 'The ingredient could not be added to the dish.' });
+        return res.status(400).render('error', { dishId, errorMessage: 'The ingredient could not be added to the dish.' });
     }
 });
 
 
-
+// Shows a confirmation prompt before removing an ingredient.
 router.get('/dish/:id/ingredient/delete', async (req, res) => {
     const dishId = req.params.id;
     const ingredientName = req.query.name;
+    try {
+        const dish = await board.getPost(dishId);
+        if (!dish || !dish.ingredients?.some(ingredient => ingredient.name === ingredientName)) {
+            return res.status(404).render('error', {
+                dishId,
+                errorMessage: 'The ingredient could not be found in this dish.'
+            });
+        }
+
+        return renderConfirmation(res, {
+            title: `Remove ${ingredientName}?`,
+            message: 'This will remove the ingredient from the dish.',
+            confirmUrl: `/dish/${encodeURIComponent(dishId)}/ingredient/delete?name=${encodeURIComponent(ingredientName)}`
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            dishId,
+            errorMessage: 'A database error occurred while deleting the ingredient.'
+        });
+    }
+});
+
+router.post('/dish/:id/ingredient/delete', async (req, res) => {
+    const dishId = req.params.id;
+    const ingredientName = req.query.name;
+    if (req.body.confirmed === 'no') {
+        return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
+    }
+    if (req.body.confirmed !== 'yes') {
+        return res.status(400).render('error', { dishId, errorMessage: 'Choose whether to continue with the operation.' });
+    }
+
     try {
         const success = await board.deleteIngredientDish(dishId, ingredientName);
         if (!success) {
@@ -318,13 +467,7 @@ router.get('/dish/:id/ingredient/delete', async (req, res) => {
                 errorMessage: 'The ingredient could not be found or deleted from the dish.'
             });
         }
-
-        return res.render('confirmation', {
-            dishId,
-            ingredientName,
-            borrado: true,
-            EditIng: false
-        });
+        return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
     } catch (error) {
         console.error(error);
         return res.status(500).render('error', {
@@ -360,7 +503,8 @@ router.get('/dish/:id/ingredient/edit', async (req, res) => {
 
     res.render('edit_ingredients', {
         dishId,
-        ingredient
+        ingredient,
+        oldName: ingredient.name
     });
 });
 
@@ -370,10 +514,6 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
     const oldName = req.body.oldName;
     const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
 
-    if (!oldName || !name) {
-        return res.status(400).render('error', { dishId, errorMessage: 'The ingredient name cannot be empty.' });
-    }
-
     const updatedIngredient = {
         name,
         lactoseIntolerancy: req.body.lactoseIntolerancy === 'true',
@@ -381,6 +521,29 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
         organic: req.body.organic === 'true',
         vegan: req.body.vegan === 'true'
     };
+
+    if (req.body.confirmed === 'no') {
+        return res.render('edit_ingredients', { dishId, oldName, ingredient: updatedIngredient });
+    }
+    if (!oldName || !name) {
+        return res.status(400).render('error', { dishId, errorMessage: 'The ingredient name cannot be empty.' });
+    }
+
+    if (req.body.confirmed !== 'yes') {
+        return renderConfirmation(res, {
+            title: `Save changes to ${name}?`,
+            message: 'Update this ingredient in the dish?',
+            confirmUrl: `/dish/${encodeURIComponent(dishId)}/ingredient/edit`,
+            fields: [
+                ['oldName', oldName],
+                ['name', updatedIngredient.name],
+                ['lactoseIntolerancy', String(updatedIngredient.lactoseIntolerancy)],
+                ['celiac', String(updatedIngredient.celiac)],
+                ['organic', String(updatedIngredient.organic)],
+                ['vegan', String(updatedIngredient.vegan)]
+            ]
+        });
+    }
 
     let success;
     try {
@@ -396,11 +559,7 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
         return res.status(404).render('error', { dishId, errorMessage: 'The ingredient could not be found or updated.' });
     }
     
-    res.render('confirmation', {
-        dishId,
-        ingredientName: name,
-        EditIng: true
-    });
+    return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
 });
 
 // Loads the dish into the form for editing.
@@ -441,37 +600,88 @@ router.get('/edit_dish', async (req, res) => {
 
 // Saves the edited dish and displays its confirmation page.
 
-router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) => {
+router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res) => {
     const dishId = req.params.id;
     const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
     const numberPrice = isValidPrice(req.body.newdishPrice) ? Number(req.body.newdishPrice) : NaN;
+    const stagedImage = req.file?.filename || (typeof req.body.stagedImage === 'string' ? req.body.stagedImage : '');
+
+    if (req.body.confirmed === 'no') {
+        await removePendingUpload(stagedImage);
+        let currentDish;
+        try {
+            currentDish = await board.getPost(dishId);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).render('error', { errorMessage: 'A database error occurred while loading the dish.' });
+        }
+        if (!currentDish) {
+            return res.status(404).render('error', { errorMessage: 'Dish not found.' });
+        }
+
+        const formDish = {
+            _id: dishId,
+            name: req.body.newdishName,
+            healingProperties: req.body.newdishHealingProperties,
+            dishDescription: req.body.newdishDescription,
+            typeOfMeal: req.body.newdishTypeofmeal,
+            chef: req.body.newdishChef,
+            foodCriticReview: req.body.newdishReview,
+            price: req.body.newdishPrice
+        };
+        return res.render('new_dish', {
+            dish: formDish,
+            isEdit: true,
+            showNewDish: false,
+            isBreakfast: formDish.typeOfMeal === 'desert/breakfast',
+            isDrinks: formDish.typeOfMeal === 'drinks',
+            isMainCourse: formDish.typeOfMeal === 'main courses',
+            isSideDish: formDish.typeOfMeal === 'side dishes',
+            isTonio: formDish.chef === 'Tonio',
+            isJoestar: formDish.chef === 'Joestar_Giovanna',
+            isBruno: formDish.chef === 'Bruno_Bucciarati',
+            isGioGio: formDish.chef === 'Gio-Gio_Gourmand',
+            isBrando: formDish.chef === "Brando_d'Abruzzo",
+            isCiocolata: formDish.chef === 'Ciocolata_Sorbett'
+        });
+    }
+
+    if (!name) {
+        await removePendingUpload(stagedImage);
+        return res.status(400).render('error', { errorMessage: 'The dish name cannot be empty.' });
+    }
     if (!Number.isFinite(numberPrice) || numberPrice < 0 || numberPrice > 1000) {
+        await removePendingUpload(stagedImage);
         return res.status(400).render('error', {
             dishId,
             errorMessage: 'The price must be between 0 and 1000, with at most two decimal places.'
         });
     }
-    const allDishes = await board.getPosts();
-    const dishExists = allDishes.some(dish =>
-        dish._id.toString() !== dishId &&
-        typeof dish.name === 'string' &&
-        dish.name.trim().toLowerCase() === name.toLowerCase()
-    );
     let currentDish;
     try {
         currentDish = await board.getPost(dishId);
     } catch (error) {
         console.error(error);
+        await removePendingUpload(stagedImage);
         return res.status(500).render('error', {
             errorMessage: 'A database error occurred while loading the dish for editing.'
         });
     }
 
     if (!currentDish) {
+        await removePendingUpload(stagedImage);
         return res.status(404).render('error', { errorMessage: 'Dish not found.' });
     }
 
+    const allDishes = await board.getPosts();
+    const dishExists = allDishes.some(dish =>
+        dish._id.toString() !== dishId &&
+        typeof dish.name === 'string' &&
+        dish.name.trim().toLowerCase() === name.toLowerCase()
+    );
+
     if (dishExists) {
+        await removePendingUpload(stagedImage);
         return res.status(400).render('error', { errorMessage: ' A dish with this name already exists.' });
     }
 
@@ -483,14 +693,51 @@ router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) =>
         chef: req.body.newdishChef,
         foodCriticReview: req.body.newdishReview,
         price: numberPrice,
-        imageFilename: req.file ? req.file.filename : currentDish.imageFilename
+        imageFilename: stagedImage || currentDish.imageFilename
     };
+
+    if (req.body.confirmed !== 'yes') {
+        return renderConfirmation(res, {
+            title: `Save changes to ${name}?`,
+            message: 'Update this dish with the submitted details?',
+            confirmUrl: `/dish/${encodeURIComponent(dishId)}/edit`,
+            fields: [
+                ['newdishName', name],
+                ['newdishHealingProperties', req.body.newdishHealingProperties || ''],
+                ['newdishDescription', req.body.newdishDescription || ''],
+                ['newdishTypeofmeal', req.body.newdishTypeofmeal || ''],
+                ['newdishChef', req.body.newdishChef || ''],
+                ['newdishReview', req.body.newdishReview || ''],
+                ['newdishPrice', String(numberPrice)],
+                ['stagedImage', stagedImage]
+            ]
+        });
+    }
+
+    if (stagedImage) {
+        if (path.basename(stagedImage) !== stagedImage) {
+            return res.status(400).render('error', { dishId, errorMessage: 'The uploaded image is invalid.' });
+        }
+        try {
+            await fs.access(path.join(PENDING_UPLOADS_FOLDER_NAME, stagedImage));
+            await fs.rename(
+                path.join(PENDING_UPLOADS_FOLDER_NAME, stagedImage),
+                path.join(UPLOADS_FOLDER_NAME, stagedImage)
+            );
+        } catch (error) {
+            console.error(error);
+            return res.status(400).render('error', { dishId, errorMessage: 'The uploaded image is no longer available. Please try again.' });
+        }
+    }
 
     let success;
     try {
         success = await board.updateDish(dishId, updatedDish);
     } catch (error) {
         console.error(error);
+        if (stagedImage) {
+            await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
+        }
         return res.status(500).render('error', {
             dishId,
             errorMessage: 'A database error occurred while updating the dish.'
@@ -498,14 +745,16 @@ router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) =>
     }
 
     if (!success) {
+        if (stagedImage) {
+            await fs.rm(path.join(UPLOADS_FOLDER_NAME, stagedImage), { force: true });
+        }
         return res.status(400).render('error', { dishId, errorMessage: 'The dish could not be updated.' });
     }
 
-    res.render('confirmation', {
-        dishId,
-        dishName: updatedDish.name,
-        EditDish: true
-    });
+    if (stagedImage && currentDish.imageFilename && currentDish.imageFilename !== stagedImage) {
+        await fs.rm(path.join(UPLOADS_FOLDER_NAME, currentDish.imageFilename), { force: true });
+    }
+    return res.redirect(303, `/show_dish?dishId=${encodeURIComponent(dishId)}`);
 });
 
 // --------------NOT USING----------------------
@@ -537,13 +786,33 @@ router.get('/post/:id', async (req, res) => {
 // Deletes a post and its associated image, if present.
 router.get('/post/:id/delete', async (req, res) => {
 
-    let post = await board.deletePost(req.params.id);
+    const post = await board.getPost(req.params.id);
+    if (!post) {
+        return res.status(404).render('error', { errorMessage: 'The post could not be found.' });
+    }
+    return renderConfirmation(res, {
+        title: `Delete ${post.name || post.title || 'this post'}?`,
+        message: 'This will permanently remove the post.',
+        confirmUrl: `/post/${encodeURIComponent(req.params.id)}/delete`
+    });
+});
 
-    if (post && post.imageFilename) {
-        await fs.rm(board.UPLOADS_FOLDER_NAME + '/' + post.imageFilename);
+router.post('/post/:id/delete', async (req, res) => {
+    if (req.body.confirmed === 'no') {
+        return res.redirect(303, '/');
+    }
+    if (req.body.confirmed !== 'yes') {
+        return res.status(400).render('error', { errorMessage: 'Choose whether to continue with the operation.' });
     }
 
-    res.render('confirmation');
+    const post = await board.deletePost(req.params.id);
+    if (!post) {
+        return res.status(404).render('error', { errorMessage: 'The post could not be found or deleted.' });
+    }
+    if (post.imageFilename) {
+        await fs.rm(path.join(UPLOADS_FOLDER_NAME, post.imageFilename), { force: true });
+    }
+    return res.redirect(303, '/');
 });
 
 
