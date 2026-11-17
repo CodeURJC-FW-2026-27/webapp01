@@ -205,7 +205,19 @@ Durante el desarrollo también se puede usar `npm run watch` para reiniciar auto
 ## Participación de miembros
 
 ### Javier Méndez
+My job was to implement the functionality in the newDish.page using the corresponding tools ought to do it. I also implemented using Mustachhe the footer template in all the project's pages. I coded the searchbar and categories features in the index page and corrected some documentation's project.
 
+**My most significant commits were:**
+- [Implementacion de la funcionalidad de creacion de nueva entidad principal](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/1c458283ad681f9e75d05cd8601974128686860f)
+- [implementacion del filtrado por tipo de plato (necesitamos cambiar dessert/breakfast)](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/684721d808850886b1c001725e05c42a9ae657cc)
+- [Implementacion de la searchbar completa)](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/680c3ff337d23b93e29f4dd7960f4058d9423f5a)
+- [Implementacion de footer por mustache )](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4d79e5e404ac05122130333196c484d97d564007)
+
+**Files I've contributed to:**
+- `src/`
+- `index.html`
+- `newDish.html`
+- `footer.html`
 
 ### Álvaro Blanco
 
