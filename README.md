@@ -114,3 +114,141 @@ I was responsible for the initial creation of the New Dish page, including its i
 - `pages/details/`   Contribution to the detail page: 19 Dishes
 - `README.md`
 
+
+# Practice 2
+
+## Requisitos
+
+- Git.
+- Node.js 18 o superior y npm. Express 5 requiere Node.js 18 o superior.
+- MongoDB Server 4.2 o superior, ejecutándose en el equipo local en el puerto `27017`.
+
+La aplicación se conecta a `mongodb://localhost:27017` y utiliza la base de datos `RISTORANTE` y la colección `DISHES`. Si la colección está vacía, al iniciar la aplicación se cargan los platos de ejemplo.
+No es necesario crear previamente la base de datos ni la colección; la aplicación las crea al guardar los primeros datos
+
+## Instalación y ejecución
+
+1. Clonar el repositorio y entrar en la carpeta del proyecto:
+
+   ```sh
+   git clone https://github.com/CodeURJC-FW-2026-27/webapp01.git
+   cd webapp01
+   ```
+
+2. Instalar las dependencias indicadas en `package-lock.json`:
+
+   ```
+   npm install
+   ```
+
+3. Iniciar MongoDB y dejarlo ejecutándose antes de arrancar la aplicación. En Linux con systemd:
+
+   ```
+   sudo systemctl start mongod
+   ```
+
+   En Windows, inicia el servicio MongoDB desde la aplicación **Servicios** (o ejecuta `net start MongoDB` en una terminal con permisos de administrador si se instaló con ese nombre de servicio). En macOS, inicia el servicio según el método usado para instalar MongoDB.
+
+4. Arrancar el servidor web desde la carpeta del proyecto:
+
+   ```
+   npm start
+   ```
+
+5. Abrir [http://localhost:3000](http://localhost:3000) en el navegador. Para detener el servidor, pulsa `Ctrl+C` en la terminal.
+
+Durante el desarrollo también se puede usar `npm run watch` para reiniciar automáticamente el servidor cuando cambien archivos JavaScript, HTML o CSS.
+
+
+## Descripción de ficheros
+
+### Aplicación y acceso a datos
+
+- `src/app.js`: configura Express, el motor de plantillas Mustache, los ficheros estáticos y el procesamiento de formularios; inicia el servidor en el puerto 3000.
+- `src/router.js`: define las rutas de la aplicación para mostrar y filtrar el menú, buscar platos, ver detalles y crear, editar o borrar platos e ingredientes. También selecciona las vistas de confirmación y error.
+- `src/board.js`: encapsula el acceso a MongoDB y las operaciones sobre platos e ingredientes, como consultas, paginación, inserciones, actualizaciones y borrados.
+- `src/load_data.js`: configura las categorías del menú, crea la carpeta de imágenes subidas y carga los datos e imágenes de ejemplo cuando la colección está vacía.
+
+### Vistas HTML de Express
+
+- `views/index.html`: página principal con el menú, los resultados de búsqueda y los controles de paginación y filtrado.
+- `views/dish_detail.html`: muestra la información de un plato y permite gestionar sus ingredientes.
+- `views/new_dish.html`: formulario compartido para crear un plato y editar uno existente.
+- `views/edit_ingredients.html`: formulario precargado para editar un ingrediente.
+- `views/about.html`: página informativa del restaurante.
+- `views/store.html`: página de reservas e información del establecimiento.
+- `views/confirmation.html`: confirma las operaciones completadas sobre platos o ingredientes.
+- `views/error.html`: muestra el motivo de una operación fallida y un enlace para volver.
+- `views/headermenus.html`: cabecera y navegación compartidas por las páginas.
+- `views/footer.html`: pie de página compartido.
+
+### Estilos, scripts y datos
+
+- `public/css/styles.css`: estilos generales y tema visual compartido.
+- `public/css/menu.css`: estilos del menú y sus elementos.
+- `public/css/details.css`: estilos de la página de detalle del plato y sus ingredientes.
+- `public/css/new_dish.css`: estilos de los formularios de platos.
+- `public/js/scripts.js`: comportamiento JavaScript del lado del cliente.
+- `public/jsonfiles/dishesbbdd_mongodb.json`: datos iniciales de los platos de ejemplo que se insertan en MongoDB si la colección está vacía.
+- `public/images/example_dishes/`: imágenes asociadas a los platos de ejemplo; se copian a `uploads/` para que la aplicación pueda servirlas.
+- `public/images/`: imágenes decorativas del restaurante, fondos, iconos y otros recursos gráficos usados por las vistas.
+
+### Otros ficheros
+
+- `package.json`: metadatos, dependencias y comandos `npm start` y `npm run watch`.
+- `package-lock.json`: fija las versiones instaladas de las dependencias para reproducir la instalación.
+
+## Video demostrativo
+
+
+
+## Participación de miembros
+
+### Javier Méndez
+
+
+### Álvaro Blanco
+
+I was responsible for restructuring the application to use Express, Mustache, and Multer, implementing a template-based rendering system. I also developed the pagination functionality for the elements and the detail page to display their information. Additionally, I implemented the automatic insertion of example data into the database when it is empty, helped integrate other application features with my code, and fixed several bugs to improve the overall functionality.
+
+**My most significant commits were:**
+
+- [fix the integration of Express and MongoDB and add sample dishes data](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/08c7c1f3d34f5cec5dd713053d3bae3512203b6f)
+- [Add pagination , check bbdd empty](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/9a634203a7428d0a8c4f703f423eb23fd9a4c7a3)
+- [Details page Part2 and pretier category selection](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/4707ee4e382f39d2e8b2c70cce9f682797361dff)
+- [Adding delete dish and some filter fixes](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/f566c651e0ea53236a91f88523739cc4e65fc053)
+
+**Files I've contributed to:**
+- `public/`
+- `src/`
+- `index.html`
+- `about.html`
+- `dish_details.html`
+- `headermenus.html`
+- `store.html`
+- `confirmation.html`
+- `styles.css`
+
+
+### Diana Grovas
+
+I implemented the functionality of the Dish Detail page, including the ability to add, edit, and delete ingredients, as well as edit existing dishes. I also created the Error page, which is displayed whenever an error occurs within the application and fixed some error catches.
+
+**My most significant commits were:**
+
+- [Adding logic for the detail page.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/02becc664bd365646c1b7f4ca8c8d20c524d30c1)
+- [Adding all the detail page functionality.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/54e07ae9bdbe32318e7a7f5f23d0cc3132852914)
+- [Error page.](https://github.com/CodeURJC-FW-2026-27/webapp01/commit/819d8c0f1fa67d1e1683ca0f344d4692102a9857)
+
+
+**Files I've contributed to:**
+
+- `board.js`
+- `router.js
+- `confirmation.html`
+- `dish_detail.html`
+- `edit_ingredients.html`
+- `new_dish.html`
+- `data.json.txt`
+- `error.html`
+- `README.md`
