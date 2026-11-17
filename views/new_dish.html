@@ -56,8 +56,8 @@
 
                             <label for="newdishTypeofmeal" class="form-label text-start d-block">Type of Meal</label>
                             <select aria-required="true" name="newdishTypeofmeal" id="newdishTypeofmeal" required class="form-select mb-3">
-                                <option value="" disabled selected>--Selecciona--</option>
-                                <option value="desert/breakfast" {{#isBreakfast}}selected{{/isBreakfast}}>Breakfast</option>
+                                <option value="" {{^isEdit}}disabled selected{{/isEdit}}>--Selecciona--</option>
+                                <option value="desert/breakfast" {{#isBreakfast}}selected{{/isBreakfast}}>Breakfast/Dessert</option>
                                 <option value="drinks" {{#isDrinks}}selected{{/isDrinks}}>Drinks</option>
                                 <option value="main courses" {{#isMainCourse}}selected{{/isMainCourse}}>Main courses</option>
                                 <option value="side dishes" {{#isSideDish}}selected{{/isSideDish}}>Side dishes</option>
@@ -65,7 +65,7 @@
 
                             <label for="newdishChef" class="form-label text-start d-block">Chef</label>
                             <select name="newdishChef" id="newdishChef" required class="form-select mb-3">
-                                <option value="" disabled selected>--Selecciona--</option>
+                                <option value="" {{^isEdit}}disabled selected{{/isEdit}}>--Selecciona--</option>
                                 <option value="Tonio" {{#isTonio}}selected{{/isTonio}}>Tonio Trussardi</option>
                                 <option value="Joestar_Giovanna" {{#isJoestar}}selected{{/isJoestar}}>Joestar Giovanna</option>
                                 <option value="Bruno_Bucciarati" {{#isBruno}}selected{{/isBruno}}>Bruno Bucciarati</option>
@@ -86,8 +86,8 @@
 
                             <label for="newdishDescription" class="form-label text-start d-block">Enter Dish
                                 Description</label>
-                            <input type="text" class="form-control mb-3" name="newdishDescription" id="newdishDescription"
-                                placeholder="Tell us about your dish!" value="{{dish.dishDescription}}" required>
+                            <textarea class="form-control mb-3" name="newdishDescription" id="newdishDescription"
+                                placeholder="Tell us about your dish!" required>{{dish.dishDescription}}</textarea>
 
 
                             <label for="newdishImage" class="form-label text-start d-block">Dish Image</label>

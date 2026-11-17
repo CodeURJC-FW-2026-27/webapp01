@@ -13,54 +13,74 @@ const upload = multer({ dest: UPLOADS_FOLDER_NAME })
 
 // Receives, validates, and saves a new dish, then displays the menu.
 router.post('/new_dish', upload.single('newdishImage'), async (req, res) => {
+    const errorPage = (status, errorMessage) => res.status(status).render('error', {
+        errorMessage,
+        returnUrl: '/new_dish',
+        returnLabel: 'Return to create dish'
+    });
+    const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
+    const description = typeof req.body.newdishDescription === 'string'
+        ? req.body.newdishDescription.trim()
+        : '';
+    const numberPrice = Number(req.body.newdishPrice);
 
-    const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
-
-    let dish = {
-        name: req.body.newdishName,
-        healingProperties: req.body.newdishHealingProperties,
-        dishDescription: req.body.newdishDescription,
-        typeOfMeal: req.body.newdishTypeofmeal,
-        chef: req.body.newdishChef,
-        foodCriticReview: req.body.newdishReview,
-        price: req.body.newdishPrice,
-        imageFilename: req.file.filename
+    if (!name) {
+        return errorPage(400, 'The dish name cannot be empty.');
     }
-    console.log(dish);
-    let numberPrice = Number(dish.price);
-
-    if (!dish.name || dish.name.trim() === '') {
-        return res.status(400).send('Name cant be empty!');
+    if (!description) {
+        return errorPage(400, 'The dish description cannot be empty.');
     }
-
-    if (!dish.dishDescription || dish.dishDescription.trim() === '') {
-        return res.status(400).send('Description cant be empty!');
-    }
-
     if (!Number.isFinite(numberPrice) || numberPrice <= 0) {
-        return res.status(400).send('Price must be grater than 0');
+        return errorPage(400, 'The price must be a number greater than zero.');
     }
-
-    if (!dish.typeOfMeal) {
-        return res.status(400).send('You must choose a type of meal');
+    if (!req.body.newdishTypeofmeal) {
+        return errorPage(400, 'You must choose a type of meal.');
     }
-
+    if (description.length < 5 || description.length > 30) {
+        return errorPage(400, 'The description must be between 5 and 30 characters.');
+    }
+    if (name[0] !== name[0].toUpperCase()) {
+        return errorPage(400, 'The first letter of the dish name must be uppercase.');
+    }
+    if (!req.file) {
+        return errorPage(400, 'Please upload an image for the dish.');
+    }
     try {
-        let result = await board.saveDish(dish);
-        console.log(result);
 
-        res.render('index', {
+        const allDishes = await board.getPosts();
+        const dishExists = allDishes.some(dish =>
+            typeof dish.name === 'string' && dish.name.trim().toLowerCase() === name.toLowerCase()
+        );
+        if (dishExists) {
+            return errorPage(400, 'A dish with this name already exists.');
+        }
+
+        const dish = {
+            name,
+            healingProperties: req.body.newdishHealingProperties,
+            dishDescription: description,
+            typeOfMeal: req.body.newdishTypeofmeal,
+            chef: req.body.newdishChef,
+            foodCriticReview: req.body.newdishReview,
+            price: req.body.newdishPrice,
+            imageFilename: req.file.filename
+        };
+        const saved = await board.saveDish(dish);
+        if (!saved) {
+            return errorPage(500, 'The dish could not be saved.');
+        }
+
+        const { dishes, pagination } = await board.getPaginatedDishes(req.query.page);
+        return res.render('index', {
             isHome: true,
             dishes,
             pagination,
             categories: getMenuCategories()
         });
-
     } catch (error) {
         console.error(error);
-        return res.status(500).send('Error al guardar el plato');
+        return errorPage(500, 'Error al guardar el plato.');
     }
-
 });
 
 // Displays the requested page of the full menu.
@@ -217,13 +237,25 @@ router.get('/image/:id', async (req, res) => {
 // Delete a dish by its ID and remove its image file if it exists.
 router.get('/delete_dish', async (req, res) => {
     const dishId = req.query.dishId;
-    const dish = await board.deletePost(dishId);
+    try {
+        const dish = await board.deletePost(dishId);
+        if (!dish) {
+            return res.status(404).render('error', {
+                errorMessage: 'The dish could not be found or deleted.'
+            });
+        }
 
-    if (dish && dish.imageFilename) {
-        await fs.rm(UPLOADS_FOLDER_NAME + '/' + dish.imageFilename);
+        if (dish.imageFilename) {
+            await fs.rm(UPLOADS_FOLDER_NAME + '/' + dish.imageFilename, { force: true });
+        }
+
+        return res.render('confirmation', { dishName: dish.name, showNewDish: false });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            errorMessage: 'A database or server error occurred while deleting the dish.'
+        });
     }
-
-    res.render('confirmation', { dishName: dish?.name, showNewDish: false });
 });
 
 
@@ -234,19 +266,19 @@ router.post('/dish/:id/ingredient', async (req, res) => {
     const ingredientName = req.body.name ? req.body.name.trim() : '';
 
     if (!ingredientName) {
-        return res.status(400).send('El nombre del ingrediente no puede estar vacío');
+        return res.status(400).render('error', { dishId, errorMessage: 'The ingredient name cannot be empty.' });
     }
 
     const dish = await board.getPost(dishId);
     if (!dish) {
-        return res.status(404).send('Plato no encontrado');
+        return res.status(404).render('error', { errorMessage: 'Dish not found.' });
     }
 
     const dishIngredients = Array.isArray(dish.ingredients) ? dish.ingredients : [];
     const ingredientExists = dishIngredients.some(ingredient => ingredient.name.toLowerCase() === ingredientName.toLowerCase());
 
     if (ingredientExists) {
-        return res.status(400).send('El ingrediente ya existe en el plato');
+        return res.status(400).render('error', { dishId, errorMessage: 'This ingredient already exists in the dish.' });
     }
 
     const newIngredient = {
@@ -267,7 +299,7 @@ router.post('/dish/:id/ingredient', async (req, res) => {
             EditIng: false
         });
     } else {
-        res.status(400).send('Error adding ingredient to dish');
+        res.status(400).render('error', { dishId, errorMessage: 'The ingredient could not be added to the dish.' });
     }
 });
 
@@ -276,18 +308,27 @@ router.post('/dish/:id/ingredient', async (req, res) => {
 router.get('/dish/:id/ingredient/delete', async (req, res) => {
     const dishId = req.params.id;
     const ingredientName = req.query.name;
+    try {
+        const success = await board.deleteIngredientDish(dishId, ingredientName);
+        if (!success) {
+            return res.status(404).render('error', {
+                dishId,
+                errorMessage: 'The ingredient could not be found or deleted from the dish.'
+            });
+        }
 
-    const success = await board.deleteIngredientDish(dishId, ingredientName);
-
-    if (success) {
-        res.render('confirmation', {
+        return res.render('confirmation', {
             dishId,
             ingredientName,
             borrado: true,
             EditIng: false
         });
-    } else {
-        res.status(400).send('Error deleting ingredient from dish');
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            dishId,
+            errorMessage: 'A database error occurred while deleting the ingredient.'
+        });
     }
 });
 
@@ -295,15 +336,24 @@ router.get('/dish/:id/ingredient/delete', async (req, res) => {
 router.get('/dish/:id/ingredient/edit', async (req, res) => {
     const dishId = req.params.id;
     const ingredientName = req.query.name;
-    const dish = await board.getPost(dishId);
+    let dish;
+    try {
+        dish = await board.getPost(dishId);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            dishId,
+            errorMessage: 'A database error occurred while loading the ingredient.'
+        });
+    }
 
     if (!dish) { // In case someone modifies the URL and the dish doesn't exist, we return a 404 error.
-        return res.status(404).send('Plato no encontrado');
+        return res.status(404).render('error', { errorMessage: 'Dish not found.' });
     }
 
     const ingredient = dish.ingredients?.find(ingredient => ingredient.name === ingredientName);
     if (!ingredient) {
-        return res.status(404).send('Ingrediente no encontrado');
+        return res.status(404).render('error', { dishId, errorMessage: 'Ingredient not found in this dish.' });
     }
 
     res.render('edit_ingredients', {
@@ -319,7 +369,7 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
     const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
 
     if (!oldName || !name) {
-        return res.status(400).send('El nombre del ingrediente no puede estar vacío');
+        return res.status(400).render('error', { dishId, errorMessage: 'The ingredient name cannot be empty.' });
     }
 
     const updatedIngredient = {
@@ -330,9 +380,18 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
         vegan: req.body.vegan === 'true'
     };
 
-    const success = await board.updateIngredientDish(dishId, oldName, updatedIngredient);
+    let success;
+    try {
+        success = await board.updateIngredientDish(dishId, oldName, updatedIngredient);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            dishId,
+            errorMessage: 'A database error occurred while updating the ingredient.'
+        });
+    }
     if (!success) {
-        return res.status(404).send('No se encontró el ingrediente para actualizar');
+        return res.status(404).render('error', { dishId, errorMessage: 'The ingredient could not be found or updated.' });
     }
     
     res.render('confirmation', {
@@ -346,26 +405,34 @@ router.post('/dish/:id/ingredient/edit', async (req, res) => {
 
 router.get('/edit_dish', async (req, res) => {
     const dishId = req.query.dishId;
-    const dish = await board.getPost(dishId);
+    let dish;
+    try {
+        dish = await board.getPost(dishId);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            errorMessage: 'A database error occurred while loading the dish.'
+        });
+    }
 
     if (!dish) {
-        return res.status(404).send('Plato no encontrado.');
+        return res.status(404).render('error', { errorMessage: 'Dish not found.' });
     }
 
     res.render('new_dish', {
         dish,
         isEdit: true,
         showNewDish: false,
-        isBreakfast: dish.typeOfMeal === 'desert/breakfast',
-        isDrinks: dish.typeOfMeal === 'drinks',
-        isMainCourse: dish.typeOfMeal === 'main courses',
-        isSideDish: dish.typeOfMeal === 'side dishes',
-        isTonio: dish.chef === 'Tonio',
-        isJoestar: dish.chef === 'Joestar_Giovanna',
-        isBruno: dish.chef === 'Bruno_Bucciarati',
-        isGioGio: dish.chef === 'Gio-Gio_Gourmand',
-        isBrando: dish.chef === "Brando_d'Abruzzo",
-        isCiocolata: dish.chef === 'Ciocolata_Sorbett'
+        isBreakfast: dish.typeOfMeal === 'Desserts',
+        isDrinks: dish.typeOfMeal === 'Drinks',
+        isMainCourse: dish.typeOfMeal === 'Starters',
+        isSideDish: dish.typeOfMeal === 'Side Dishes',
+        isTonio: dish.chef === 'Tonio Trussardi',
+        isJoestar: dish.chef === 'Joestar Giovanna',
+        isBruno: dish.chef === 'Bruno Bucciarati',
+        isGioGio: dish.chef === 'Gio-Gio Gourmand',
+        isBrando: dish.chef === "Brando d'Abruzzo",
+        isCiocolata: dish.chef === 'Ciocolata Sorbett'
     });
 });
 
@@ -374,10 +441,24 @@ router.get('/edit_dish', async (req, res) => {
 
 router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) => {
     const dishId = req.params.id;
-    const currentDish = await board.getPost(dishId);
+    const allDishes = await board.getPosts();
+    const dishExists = allDishes.some(dish => dish.name.toLowerCase() === name.toLowerCase());
+    let currentDish;
+    try {
+        currentDish = await board.getPost(dishId);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            errorMessage: 'A database error occurred while loading the dish for editing.'
+        });
+    }
 
     if (!currentDish) {
-        return res.status(400).send('El plato no existe.');
+        return res.status(404).render('error', { errorMessage: 'Dish not found.' });
+    }
+
+    if (dishExists) {
+        return res.status(400).render('error', { errorMessage: ' A dish with this name already exists.' });
     }
 
     const updatedDish = {
@@ -391,10 +472,19 @@ router.post('/dish/:id/edit', upload.single('newdishImage'), async (req, res) =>
         imageFilename: req.file ? req.file.filename : currentDish.imageFilename
     };
 
-    const success = await board.updateDish(dishId, updatedDish);
+    let success;
+    try {
+        success = await board.updateDish(dishId, updatedDish);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render('error', {
+            dishId,
+            errorMessage: 'A database error occurred while updating the dish.'
+        });
+    }
 
     if (!success) {
-        return res.status(400).send('Error al actualizar el plato.');
+        return res.status(400).render('error', { dishId, errorMessage: 'The dish could not be updated.' });
     }
 
     res.render('confirmation', {
