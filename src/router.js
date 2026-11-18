@@ -619,7 +619,7 @@ router.get('/edit_dish', async (req, res) => {
         showNewDish: false,
         isBreakfast: dish.typeOfMeal === 'Desserts',
         isDrinks: dish.typeOfMeal === 'Drinks',
-        isMainCourse: dish.typeOfMeal === 'Starters',
+        isMainCourse: dish.typeOfMeal === 'Main Courses',
         isSideDish: dish.typeOfMeal === 'Side Dishes',
         isTonio: dish.chef === 'Tonio Trussardi',
         isJoestar: dish.chef === 'Joestar Giovanna',
