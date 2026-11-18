@@ -333,6 +333,20 @@ router.get('/image/:id', async (req, res) => {
     });
 });
 
+// Sends a pending image to the browser for preview before saving the dish.
+router.get('/pending-image/:filename', (req, res) => {
+    const filename = req.params.filename;
+    if (path.basename(filename) !== filename) {
+        return res.status(404).render('error', {
+                errorMessage: 'The requested image could not be found.'
+            });
+        }
+
+    return res.sendFile(filename, {
+        root: path.resolve(PENDING_UPLOADS_FOLDER_NAME)
+    });
+});
+
 // Shows a confirmation prompt before deleting the dish.
 router.get('/delete_dish', async (req, res) => {
     const dishId = req.query.dishId;
@@ -623,10 +637,13 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
     const dishId = req.params.id;
     const name = typeof req.body.newdishName === 'string' ? req.body.newdishName.trim() : '';
     const numberPrice = isValidPrice(req.body.newdishPrice) ? Number(req.body.newdishPrice) : NaN;
-    const stagedImage = req.file?.filename || (typeof req.body.stagedImage === 'string' ? req.body.stagedImage : '');
+    const previousStagedImage = typeof req.body.stagedImage === 'string' ? req.body.stagedImage : '';
+    const stagedImage = req.file?.filename || previousStagedImage;
+    if (req.file && previousStagedImage && previousStagedImage !== req.file.filename) {
+        await removePendingUpload(previousStagedImage);
+    }
 
     if (req.body.confirmed === 'no') {
-        await removePendingUpload(stagedImage);
         let currentDish;
         try {
             currentDish = await board.getPost(dishId);
@@ -652,6 +669,7 @@ router.post('/dish/:id/edit', editUpload.single('newdishImage'), async (req, res
             dish: formDish,
             isEdit: true,
             showNewDish: false,
+            stagedImage,
             isBreakfast: formDish.typeOfMeal === 'Desserts',
             isDrinks: formDish.typeOfMeal === 'Drinks',
             isMainCourse: formDish.typeOfMeal === 'Main Courses',

@@ -92,9 +92,15 @@
                             <label for="newdishImage" class="form-label text-start d-block">Dish Image</label>
                             <input type="file" name="newdishImage" id="newDishImage"  accept=".jpg, .jpeg" class="form-control mb-4" {{^isEdit}}required{{/isEdit}}>
                             {{#isEdit}}
+                            {{#stagedImage}}
+                            <input type="hidden" name="stagedImage" value="{{.}}">
+                            {{/stagedImage}}
                             <div class="d-flex align-items-start gap-3 mb-4 pb-2">
-                                <span class="fw-normal">Current:</span>
-                                <img id="dishImagePreview" src="/image/{{dish._id}}" alt="Dish image preview"
+                                <span class="fw-normal">{{#stagedImage}}Preview:{{/stagedImage}}{{^stagedImage}}Current:{{/stagedImage}}</span>
+                                <img id="dishImagePreview"
+                                    {{#stagedImage}}src="/pending-image/{{.}}"{{/stagedImage}}
+                                    {{^stagedImage}}src="/image/{{dish._id}}"{{/stagedImage}}
+                                    alt="Dish image preview"
                                     class="dish-current-image img-fluid rounded">
                             </div>
                             {{/isEdit}}
